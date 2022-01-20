@@ -1,0 +1,15 @@
+Package: easycensus
+Title: Quickly Extract and Marginalize U.S. Census Tables
+Version: 0.0.0.9000
+Authors@R: 
+    person("Cory", "McCartan", email="cmccartan@g.harvard.edu", role=c("aut", "cre"))
+Description: Extracting desired data using the proper Census variable names can 
+    be time-consuming. This package takes the pain out of that process.
+Imports:
+    rlang,
+    tidycensus
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
