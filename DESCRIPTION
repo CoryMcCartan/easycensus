@@ -7,9 +7,17 @@ Description: Extracting desired data using the proper Census variable names can
     be time-consuming. This package takes the pain out of that process.
 Imports:
     rlang,
-    tidycensus
+    dplyr,
+    stringr,
+    tidycensus,
+    cli
+Suggests:
+    dplyr,
+    purrr,
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+Depends: 
+    R (>= 2.10)
