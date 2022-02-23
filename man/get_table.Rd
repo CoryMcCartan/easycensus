@@ -41,7 +41,7 @@ under one code. So, for example, use \code{P012}, not \code{P012A}.}
 
 \item{county}{The state to get data for, if any.}
 
-\item{...}{Further rguments passed to \code{\link[tidycensus:get_decennial]{tidycensus::get_decennial()}} or
+\item{...}{Further arguments passed to \code{\link[tidycensus:get_decennial]{tidycensus::get_decennial()}} or
 \code{\link[tidycensus:get_acs]{tidycensus::get_acs()}}, e.g. \code{year}, \code{state}, \code{county}, \code{geometry}.}
 
 \item{drop_total}{Whether to filter out variables which are totals across

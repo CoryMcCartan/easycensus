@@ -88,7 +88,7 @@ print(d_cens)
 the usual arguments to those functions (including the ability to get
 shapefile information) work here, too.
 
-Once you’ve gotten your labelled data, it’s easy to marginalize out the
+Once you’ve gotten your labeled data, it’s easy to marginalize out the
 unneeded `sex` variable. You can either use `group_by()` and
 `summarize()` as usual, or you can use the `marginalize()` function in
 `easycensus`. This has the added advantage of automatically handling

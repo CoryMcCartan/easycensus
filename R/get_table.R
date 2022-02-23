@@ -19,7 +19,7 @@
 #' @param survey For ACS data, whether to use the one-year or
 #'   five-year survey (the default). Make sure to check availability using
 #'   [find_acs_table()].
-#' @param ... Further rguments passed to [tidycensus::get_decennial()] or
+#' @param ... Further arguments passed to [tidycensus::get_decennial()] or
 #'   [tidycensus::get_acs()], e.g. `year`, `state`, `county`, `geometry`.
 #' @param drop_total Whether to filter out variables which are totals across
 #'   another variable. Recommended only after inspection of the underlying

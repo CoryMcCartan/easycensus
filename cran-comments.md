@@ -1,3 +1,8 @@
+## Test environments
+* local R installation (macOS), R 4.1.2
+* ubuntu-latest (on GitHub Actions), (release)
+* windows-latest (on winbuilder), (devel)
+
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
