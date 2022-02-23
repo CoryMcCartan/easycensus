@@ -17,7 +17,7 @@
 #' @examples
 #' find_dec_table("sex", "age")
 #' find_dec_table(tenure, race)
-#' find_acs_table("income", "sex", show=10)
+#' find_acs_table("income", "sex", show=3)
 #' find_acs_table("heath care", show=-1)
 #'
 #' @name find_table
