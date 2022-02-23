@@ -40,6 +40,6 @@ get_dec_table <- function(geography, table, ..., drop_total=FALSE) {
 
     tbl_vars = spec$vars
     if (isTRUE(drop_total))
-        tbl_vars = dplyr::filter(tbl_vars, if_all(-1, function(x) x != "total"))
+        tbl_vars = dplyr::filter(tbl_vars, dplyr::if_all(-1, function(x) x != "total"))
     dplyr::inner_join(d, tbl_vars, by="variable")
 }

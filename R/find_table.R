@@ -31,7 +31,7 @@ find_dec_table <- function(..., show=2) {
         0.5*complexity/mean(complexity) +
         0.1*avg_dists_2/mean(avg_dists_2)
 
-    best = names(head(sort(avg_dists), abs(show)))
+    best = names(utils::head(sort(avg_dists), abs(show)))
     if (show > 0) output_matching_tables(best, tables_sf1)
     invisible(best)
 }

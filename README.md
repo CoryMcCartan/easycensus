@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# easycensus
+# **easycensus**
 
 <!-- badges: start -->
 
@@ -44,9 +44,9 @@ find_dec_table(age, race)
 #> • age
 #> • race_ethnicity
 #> Example values:
-#> • female / 25 to 29 years / white alone
-#> • female / 67 to 69 years / asian alone
-#> • male / 55 to 59 years / white alone, not hispanic or latino
+#> • female / 45 to 49 years / black or african american alone
+#> • female / 20 years / two or more races
+#> • male / 55 to 59 years / american indian and alaska native alone
 #> 
 #>  PCT012  - SEX BY AGE
 #> Parsed variables:
@@ -54,9 +54,9 @@ find_dec_table(age, race)
 #> • age
 #> • race_ethnicity
 #> Example values:
-#> • male / 95 years / two or more races
-#> • male / 59 years / asian alone
-#> • male / 33 years / white alone, not hispanic or latino
+#> • female / 70 years / total
+#> • female / 85 years / native hawaiian and other pacific islander alone
+#> • female / 30 years / two or more races
 ```
 
 We can see right away that our best bet is either table `P012` or table

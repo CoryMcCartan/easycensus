@@ -11,9 +11,11 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+set.seed(5118)
 ```
 
-# easycensus
+# **easycensus**
 
 <!-- badges: start -->
 
@@ -81,3 +83,4 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("CoryMcCartan/easycensus")
 ```
+

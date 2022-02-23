@@ -7,12 +7,11 @@ Description: Extracting desired data using the proper Census variable names can
     be time-consuming. This package takes the pain out of that process.
 Imports:
     rlang,
-    dplyr,
+    dplyr (>= 1.0.0),
     stringr,
     tidycensus,
     cli
 Suggests:
-    dplyr,
     purrr,
 License: MIT + file LICENSE
 Encoding: UTF-8
