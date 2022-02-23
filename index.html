@@ -24,7 +24,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark"><div class="container">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
     
     <a class="navbar-brand me-2" href="index.html">easycensus</a>
 
@@ -53,7 +53,8 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="easycensus">easycensus<a class="anchor" aria-label="anchor" href="#easycensus"></a>
+<div class="page-header"><h1 id="easycensus">
+<strong>easycensus</strong><a class="anchor" aria-label="anchor" href="#easycensus"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -66,7 +67,7 @@
 
 <span class="fu"><a href="reference/find_dec_table.html">find_dec_table</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">race</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── Top 2 matching tables ──</span>
+<span class="co">#&gt; ── Top 2 matching tables ───────────────────────────────────────────────────────</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  P012  - SEX BY AGE</span>
 <span class="co">#&gt; Parsed variables:</span>
@@ -74,19 +75,19 @@
 <span class="co">#&gt; • age</span>
 <span class="co">#&gt; • race_ethnicity</span>
 <span class="co">#&gt; Example values:</span>
-<span class="co">#&gt; • female / 5 to 9 years / total</span>
-<span class="co">#&gt; • female / 20 years / white alone, not hispanic or latino</span>
-<span class="co">#&gt; • male / total / white alone</span>
+<span class="co">#&gt; • female / 45 to 49 years / black or african american alone</span>
+<span class="co">#&gt; • female / 20 years / two or more races</span>
+<span class="co">#&gt; • male / 55 to 59 years / american indian and alaska native alone</span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt;  PCT012  - SEX BY AGE</span>
 <span class="co">#&gt; Parsed variables:</span>
 <span class="co">#&gt; • sex</span>
 <span class="co">#&gt; • age</span>
 <span class="co">#&gt; • race_ethnicity</span>
 <span class="co">#&gt; Example values:</span>
-<span class="co">#&gt; • female / 50 years / two or more races</span>
-<span class="co">#&gt; • male / 110 years and over / black or african american alone</span>
-<span class="co">#&gt; • female / 69 years / native hawaiian and other pacific islander alone, not</span>
-<span class="co">#&gt; hispanic or latino</span></code></pre></div>
+<span class="co">#&gt; • female / 70 years / total</span>
+<span class="co">#&gt; • female / 85 years / native hawaiian and other pacific islander alone</span>
+<span class="co">#&gt; • female / 30 years / two or more races</span></code></pre></div>
 <p>We can see right away that our best bet is either table <code>P012</code> or table <code>PCT012</code>, depending on whether we want age in 5-year groups or down to individual years. Let’s say you’re OK with the five-year bins. Then all you need to do to get your data is to call <code><a href="reference/get_dec_table.html">get_dec_table()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">d_cens</span> <span class="op">=</span> <span class="fu"><a href="reference/get_dec_table.html">get_dec_table</a></span><span class="op">(</span><span class="st">"tract"</span>, <span class="st">"P012"</span>, state<span class="op">=</span><span class="st">"AK"</span>, county<span class="op">=</span><span class="st">"Nome"</span><span class="op">)</span>
@@ -111,8 +112,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 
 <span class="va">d_cens</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-    <span class="co"># drop table margins</span>
-    <span class="co"># can also use `drop_total=TRUE` in `get_dec_table()`</span>
+    <span class="co"># Drop table margins. Can also use `drop_total=TRUE` in `get_dec_table()`</span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">age</span> <span class="op">!=</span> <span class="st">"total"</span>, <span class="va">race_ethnicity</span> <span class="op">!=</span> <span class="st">"total"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">GEOID</span>, <span class="va">age</span>, <span class="va">race_ethnicity</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span>
