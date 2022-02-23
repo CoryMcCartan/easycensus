@@ -6,12 +6,22 @@
 \alias{get_acs_table}
 \title{Download data from a decennial census or ACS table}
 \usage{
-get_dec_table(geography, table, ..., drop_total = FALSE)
+get_dec_table(
+  geography,
+  table,
+  state = NULL,
+  county = NULL,
+  ...,
+  drop_total = FALSE
+)
 
 get_acs_table(
   geography,
   table,
-  survey = c("acs5", "acs3", "acs1"),
+  year = 2019,
+  state = NULL,
+  county = NULL,
+  survey = c("acs5", "acs1"),
   ...,
   drop_total = FALSE
 )
@@ -27,16 +37,22 @@ identifying a table of interest. Note: some tables are split into
 A/B/C/etc. versions by race; this function unifies all of these tables
 under one code. So, for example, use \code{P012}, not \code{P012A}.}
 
-\item{...}{Arguments passed to \code{\link[tidycensus:get_decennial]{tidycensus::get_decennial()}} or
+\item{state}{The state to get data for, if any.}
+
+\item{county}{The state to get data for, if any.}
+
+\item{...}{Further rguments passed to \code{\link[tidycensus:get_decennial]{tidycensus::get_decennial()}} or
 \code{\link[tidycensus:get_acs]{tidycensus::get_acs()}}, e.g. \code{year}, \code{state}, \code{county}, \code{geometry}.}
 
 \item{drop_total}{Whether to filter out variables which are totals across
 another variable. Recommended only after inspection of the underlying
 table.}
 
-\item{survey}{For ACS data, whether to use the one-year, three-year, or
-five-year survey (the default). Note that some tables from
-\code{\link[=find_acs_table]{find_acs_table()}} may only be available for \code{acs5}.}
+\item{year}{For ACS data, the survey year to get data for.}
+
+\item{survey}{For ACS data, whether to use the one-year or
+five-year survey (the default). Make sure to check availability using
+\code{\link[=find_acs_table]{find_acs_table()}}.}
 }
 \value{
 A tibble of census data in tidy format, with columns
@@ -45,7 +61,9 @@ A tibble of census data in tidy format, with columns
 and additional factor columns specific to the table.
 }
 \description{
-Download data from a decennial census or ACS table
+Leverages \code{\link[tidycensus:get_decennial]{tidycensus::get_decennial()}} and \code{\link[tidycensus:get_acs]{tidycensus::get_acs()}} to
+download tables of census data. Tables are returned in tidy format, with
+variables given tidy, human-readable names.
 }
 \examples{
 \dontrun{

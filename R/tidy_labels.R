@@ -115,6 +115,7 @@ tidy_parens = function(x) {
 
 
 labs_race_ethnicity = c("total"="total",
+                        "population of one race"="one",
                         "white alone"="white",
                         "black or african american alone"="black",
                         "american indian and alaska native alone"="aian",

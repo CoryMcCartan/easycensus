@@ -37,8 +37,8 @@ find_dec_table <- function(..., show=2) {
 #' @export
 find_acs_table <- function(..., show=4) {
     variables = str_to_upper(vapply(rlang::enquos(...), rlang::as_name, character(1)))
-    best = utils::head(match_tables(variables, tables_acs5, complex_pen=0.1), abs(show))
-    if (show > 0) output_matching_tables(best, tables_acs5)
+    best = utils::head(match_tables(variables, tables_acs, complex_pen=0.1), abs(show))
+    if (show > 0) output_matching_tables(best, tables_acs, acs=TRUE)
     invisible(best)
 }
 
@@ -60,7 +60,7 @@ match_tables = function(variables, table_specs, complex_pen=0.5) {
 }
 
 
-output_matching_tables = function(codes, table_specs) {
+output_matching_tables = function(codes, table_specs, acs=FALSE) {
     cli_h1("Top {length(codes)} matching table{?s}")
     for (tbl in codes) {
         spec = table_specs[[tbl]]
@@ -69,11 +69,31 @@ output_matching_tables = function(codes, table_specs) {
         cli_text(style_bold(style_inverse(c("\u00a0", tbl, "\u00a0"))), #nbsp
                  style_bold(c(" - ", spec$concept)))
 
+        if (isTRUE(acs)) {
+            cli_text("Availability:")
+            acs1_avail = mean(spec$vars$acs1)
+            acs5_avail = mean(spec$vars$acs5)
+            if (acs5_avail == 0) {
+                cli_alert_danger("5-year ACS")
+            } else if (acs5_avail == 1) {
+                cli_alert_success("5-year ACS")
+            } else {
+                cli_alert_warning("(Partial) 5-year ACS")
+            }
+            if (acs1_avail == 0) {
+                cli_alert_danger("1-year ACS")
+            } else if (acs1_avail == 1) {
+                cli_alert_success("1-year ACS")
+            } else {
+                cli_alert_warning("(Partial) 1-year ACS")
+            }
+        }
+
         cli_text("Parsed variables:")
         cli_ul(items = str_c("{.field ", spec$dims, "}"))
 
         cli_text("Example values:")
-        ex_items = as.matrix(spec$vars)
+        ex_items = as.matrix(dplyr::select(spec$vars, -dplyr::any_of(c("acs5", "acs1"))))
         if (ncol(ex_items) > 1) {
             ex_items = ex_items[sample.int(n_vars, min(n_vars, 3)), -1, drop=FALSE]
             ex_items = apply(ex_items, 1, function(x) paste(x, collapse=" / "))

@@ -80,6 +80,6 @@ tables_sf1 = vars_sf1 %>%
     group_map(parse_table) %>%
     flatten()
 
-# then go make tables_acs5
-usethis::use_data(tables_sf1, tables_acs5, overwrite=TRUE, compress="xz", internal=TRUE)
-rm(tables_sf1, tables_acs5)
+# then go make tables_acs
+usethis::use_data(tables_sf1, tables_acs, overwrite=TRUE, compress="xz", internal=TRUE)
+rm(tables_sf1, tables_acs)

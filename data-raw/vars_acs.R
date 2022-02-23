@@ -10,6 +10,15 @@ vars_acs5 = tidycensus::load_variables(2019, "acs5") %>%
            !str_detect(label, "!!Not defined")) %>%
     mutate(label = str_sub(label, 11))
 
+vars_acs1 = tidycensus::load_variables(2019, "acs1") %>%
+    filter(str_starts(label, "Estimate!!"),
+           !str_detect(label, "!!Not defined")) %>%
+    mutate(label = str_sub(label, 11))
+
+vars_acs = full_join(vars_acs5, vars_acs1, by=c("name", "label", "concept")) %>%
+    mutate(acs5 = name %in% vars_acs5$name,
+           acs1 = name %in% vars_acs1$name)
+
 
 # Handle repeated tables by race
 paren_race_re = "\\((WHITE|BLACK|AMERI|ASIAN|NATIVE|SOME OTHER|TWO OR|HISPANIC)[A-Z, ]+\\)"
@@ -35,7 +44,7 @@ parse_label_group = function(lbl) {
         str_to_lower()
 }
 
-tbl = filter(vars_acs5, str_starts(name, "C27009"))
+tbl = filter(vars_acs, str_starts(name, "B15002"))
 parse_table = function(tbl, key) {
     dim_cats = str_split(tbl$label, "!!", simplify=TRUE)[, drop=FALSE]
     const_cats = apply(dim_cats, 2, n_distinct) == 1
@@ -55,11 +64,17 @@ parse_table = function(tbl, key) {
 
     dim_lbls = parse_concept(unique(tbl$concept))
 
+    short_lbls = str_replace_all(dim_lbls, "_", " ") %>%
+        str_remove_all("(or|and|of|the|for|in|,) ") %>%
+        str_to_title() %>%
+        abbreviate(5, named=FALSE) %>%
+        str_to_lower() %>%
+        paste(collapse="_")
     if (depth == length(dim_lbls) + 1L) {
-        new_dim = paste0(paste(dim_lbls, collapse="."), "_sub")
+        new_dim = paste0(short_lbls, "_sub")
         dim_lbls = c(dim_lbls, new_dim)
     } else if (depth > length(dim_lbls)) {
-        dim_lbls = str_c(paste(dim_lbls, collapse="."), ".", seq_len(depth))
+        dim_lbls = str_c(short_lbls, "_", seq_len(depth))
     } else if (depth < length(dim_lbls)) {
         dim_lbls = dim_lbls[-seq_len(length(dim_lbls) - depth)]
     }
@@ -67,8 +82,10 @@ parse_table = function(tbl, key) {
     vars_tbl = dim_cats %>%
         `colnames<-`(dim_lbls) %>%
         as_tibble() %>%
+        bind_cols(select(tbl, acs5, acs1)) %>%
         mutate(variable=tbl$name, .before=1) %>%
-        mutate(across(-1, \(x) as.factor(parse_label_group(x))))
+        mutate(across(c(-variable, -acs1, -acs5),
+                      function(x) as.factor(parse_label_group(x))))
 
     out = list(list(concept = tbl$concept[1],
                     tables = unique(str_sub(tbl$name, 1, -5)),
@@ -78,7 +95,7 @@ parse_table = function(tbl, key) {
     out
 }
 
-tables_acs5 = vars_acs5 %>%
+tables_acs = vars_acs %>%
     mutate(table = str_extract(name, "[BC]\\d\\d\\d\\d\\d\\d?")) %>%
     group_by(table) %>%
     group_map(parse_table) %>%
