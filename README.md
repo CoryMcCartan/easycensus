@@ -36,7 +36,7 @@ library(easycensus)
 
 find_dec_table(age, race)
 #> 
-#> ── Top 2 matching tables ──
+#> ── Top 2 matching tables ───────────────────────────────────────────────────────
 #> 
 #>  P012  - SEX BY AGE
 #> Parsed variables:
@@ -44,19 +44,19 @@ find_dec_table(age, race)
 #> • age
 #> • race_ethnicity
 #> Example values:
-#> • female / 5 to 9 years / total
-#> • female / 20 years / white alone, not hispanic or latino
-#> • male / total / white alone
+#> • female / 25 to 29 years / white alone
+#> • female / 67 to 69 years / asian alone
+#> • male / 55 to 59 years / white alone, not hispanic or latino
+#> 
 #>  PCT012  - SEX BY AGE
 #> Parsed variables:
 #> • sex
 #> • age
 #> • race_ethnicity
 #> Example values:
-#> • female / 50 years / two or more races
-#> • male / 110 years and over / black or african american alone
-#> • female / 69 years / native hawaiian and other pacific islander alone, not
-#> hispanic or latino
+#> • male / 95 years / two or more races
+#> • male / 59 years / asian alone
+#> • male / 33 years / white alone, not hispanic or latino
 ```
 
 We can see right away that our best bet is either table `P012` or table
@@ -95,8 +95,7 @@ unneeded `sex` variable.
 library(dplyr)
 
 d_cens %>%
-    # drop table margins
-    # can also use `drop_total=TRUE` in `get_dec_table()`
+    # Drop table margins. Can also use `drop_total=TRUE` in `get_dec_table()`
     filter(age != "total", race_ethnicity != "total") %>%
     group_by(GEOID, age, race_ethnicity) %>%
     summarize(value = sum(value))

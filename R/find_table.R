@@ -38,10 +38,11 @@ find_dec_table <- function(..., show=2) {
 
 
 output_matching_tables = function(codes, table_specs) {
-    cli_h2("Top {length(codes)} matching table{?s}")
+    cli_h1("Top {length(codes)} matching table{?s}")
     for (tbl in codes) {
         spec = table_specs[[tbl]]
         n_vars = nrow(spec$vars)
+        cli_text("\n")
         cli_text(style_bold(style_inverse(c("\u00a0", tbl, "\u00a0"))), #nbsp
                  style_bold(c(" - ", spec$concept)))
 
@@ -57,6 +58,6 @@ output_matching_tables = function(codes, table_specs) {
             ex_items = ex_items[1, -1]
         }
         cli_ul(items = ex_items)
-        cat("\n")
+        cli_end()
     }
 }
