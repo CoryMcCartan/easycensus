@@ -5,13 +5,10 @@ library(stringr)
 
 # Get variable tables ------
 
-vars_sf1 = tidycensus::load_variables(2010, "sf1") %>%
-    filter(str_starts(label, "Total!!") | str_ends(name, "001001"),
-           !str_detect(label, "!!Not defined"))
 vars_acs5 = tidycensus::load_variables(2019, "acs5") %>%
     filter(str_starts(label, "Estimate!!Total:"),
-           !str_detect(label, "!!Not defined")
-    mutate(label = str_sub(label, 17))
+           !str_detect(label, "!!Not defined")) %>%
+    mutate(label = str_sub(label, 11))
 
 
 # Handle repeated tables by race

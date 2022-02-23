@@ -5,6 +5,8 @@ Authors@R:
     person("Cory", "McCartan", email="cmccartan@g.harvard.edu", role=c("aut", "cre"))
 Description: Extracting desired data using the proper Census variable names can 
     be time-consuming. This package takes the pain out of that process.
+Depends: 
+    R (>= 2.10)
 Imports:
     rlang,
     dplyr (>= 1.0.0),
@@ -12,12 +14,13 @@ Imports:
     tidycensus,
     cli
 Suggests:
-    purrr,
+    testthat (>= 3.0.0),
+    purrr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Depends: 
-    R (>= 2.10)
 URL: https://corymccartan.github.io/easycensus/
+BugReports:	https://github.com/CoryMcCartan/easycensus/issues
+Config/testthat/edition: 3
