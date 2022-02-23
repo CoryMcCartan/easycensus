@@ -11,3 +11,5 @@ docs
 *.swp
 *.rds
 *.rda
+
+*_cache

@@ -16,11 +16,53 @@ knitr::opts_chunk$set(
 # easycensus
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/CoryMcCartan/easycensus/workflows/R-CMD-check/badge.svg)](https://github.com/CoryMcCartan/easycensus/actions)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+
+[![R-CMD-check](https://github.com/CoryMcCartan/easycensus/workflows/R-CMD-check/badge.svg)](https://github.com/CoryMcCartan/easycensus/actions) [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 <!-- badges: end -->
 
-The goal of easycensus is to ...
+Extracting desired data using the proper Census variable names can be time-consuming.
+This package takes the pain out of that process.
+
+The use case is best illustrated by an example.
+Suppose you want age-by-race information at the tract level.
+Unfortunately, the Census Bureau doesn't publish a specific age-by-race table.
+You could build one yourself from public-use microdata, but that lacks tract-level geographic information, for privacy reasons.
+So you are left trying to find an existing Census product that you can extract age-by-race information from.
+
+Unless you're a Census pro, you won't know what exactly what is off the top of your head.
+But suppose you know you'd like to get the data from the decennial census, since it covers the whole nation and asks about age and race.
+`easycensus` provides the `find_dec_table()` function to help you locate exactly which decennial census table to use to get the data you want.
+
+```{r}
+library(easycensus)
+
+find_dec_table(age, race)
+```
+
+We can see right away that our best bet is either table `P012` or table `PCT012`, depending on whether we want age in 5-year groups or down to individual years.
+Let's say you're OK with the five-year bins.
+Then all you need to do to get your data is to call `get_dec_table()`.
+
+```{r cache=TRUE}
+d_cens = get_dec_table("tract", "P012", state="AK", county="Nome")
+print(d_cens)
+```
+
+`easycensus` is built on top of the great [`tidycensus`](https://walker-data.com/tidycensus/) package, so all of the usual arguments to those functions (including the ability to get shapefile information) work here, too.
+
+Once you've gotten your labelled data, it's easy to marginalize out the unneeded `sex` variable.
+
+```{r message=F}
+library(dplyr)
+
+d_cens %>%
+    # drop table margins
+    # can also use `drop_total=TRUE` in `get_dec_table()`
+    filter(age != "total", race_ethnicity != "total") %>%
+    group_by(GEOID, age, race_ethnicity) %>%
+    summarize(value = sum(value))
+```
 
 ## Installation
 

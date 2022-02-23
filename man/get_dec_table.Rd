@@ -31,8 +31,10 @@ and additional factor columns specific to the table.
 Download data from a decennial census table
 }
 \examples{
+\dontrun{
 get_dec_table("state", "P003")
 get_dec_table("state", "H002")
 get_dec_table("state", "H002", drop_total=TRUE)
+}
 
 }

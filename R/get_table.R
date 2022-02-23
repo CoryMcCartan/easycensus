@@ -17,19 +17,25 @@
 #'   `GEOID`, `NAME`, `variable` (containing the Census variable code), `value`,
 #'   and additional factor columns specific to the table.
 #'
-#' @examples
+#' @examples \dontrun{
 #' get_dec_table("state", "P003")
 #' get_dec_table("state", "H002")
 #' get_dec_table("state", "H002", drop_total=TRUE)
+#' }
 #'
 #' @export
 get_dec_table <- function(geography, table, ..., drop_total=FALSE) {
     spec = tables_sf1[[table]]
     suppressMessages({
+    tryCatch({
         d = do.call(dplyr::bind_rows, lapply(spec$tables, function(tbl_code) {
-            tidycensus::get_decennial(geography, table=tbl_code,
+            tidycensus::get_decennial(geography, variables=spec$vars$variable,
                                       sumfile="sf1", output="tidy", ...)
         }))
+    },
+    error = function(e) {
+        rlang::abort(e)
+    })
     })
 
     tbl_vars = spec$vars

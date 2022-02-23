@@ -1,0 +1,8 @@
+url: https://corymccartan.github.io/easycensus/
+template:
+  bootstrap: 5
+  bootswatch: flatly
+navbar:
+  bg: dark
+
+

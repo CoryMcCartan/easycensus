@@ -8,6 +8,13 @@
 \description{
 Extracting desired data using the proper Census variable names can be time-consuming. This package takes the pain out of that process.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://corymccartan.github.io/easycensus/}
+}
+
+}
 \author{
 \strong{Maintainer}: Cory McCartan \email{cmccartan@g.harvard.edu}
 
