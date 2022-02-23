@@ -89,32 +89,64 @@ the usual arguments to those functions (including the ability to get
 shapefile information) work here, too.
 
 Once you’ve gotten your labelled data, it’s easy to marginalize out the
-unneeded `sex` variable.
+unneeded `sex` variable. You can either use `group_by()` and
+`summarize()` as usual, or you can use the `marginalize()` function in
+`easycensus`. This has the added advantage of automatically handling
+margins of error for ACS data.
 
 ``` r
 library(dplyr)
 
-d_cens %>%
+d_cens = d_cens %>%
     # Drop table margins. Can also use `drop_total=TRUE` in `get_dec_table()`
     filter(age != "total", race_ethnicity != "total") %>%
-    group_by(GEOID, age, race_ethnicity) %>%
-    summarize(value = sum(value))
-#> # A tibble: 414 × 4
-#> # Groups:   GEOID, age [46]
-#>    GEOID       age            race_ethnicity                               value
-#>    <chr>       <fct>          <fct>                                        <dbl>
-#>  1 02180000100 10 to 14 years american indian and alaska native alone       5240
-#>  2 02180000100 10 to 14 years asian alone                                     10
-#>  3 02180000100 10 to 14 years black or african american alone                 10
-#>  4 02180000100 10 to 14 years hispanic or latino                              30
-#>  5 02180000100 10 to 14 years native hawaiian and other pacific islander …     0
-#>  6 02180000100 10 to 14 years some other race alone                            0
-#>  7 02180000100 10 to 14 years two or more races                              230
-#>  8 02180000100 10 to 14 years white alone                                    110
-#>  9 02180000100 10 to 14 years white alone, not hispanic or latino            100
-#> 10 02180000100 15 to 17 years american indian and alaska native alone       2930
+    marginalize(age, race=race_ethnicity)
+print(d_cens)
+#> # A tibble: 414 × 5
+#> # Groups:   GEOID, NAME, age [46]
+#>    GEOID       NAME                                     age          race  value
+#>    <chr>       <chr>                                    <fct>        <fct> <dbl>
+#>  1 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… amer…  5240
+#>  2 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… asia…    10
+#>  3 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… blac…    10
+#>  4 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… hisp…    30
+#>  5 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… nati…     0
+#>  6 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… some…     0
+#>  7 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… two …   230
+#>  8 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… whit…   110
+#>  9 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… whit…   100
+#> 10 02180000100 Census Tract 1, Nome Census Area, Alaska 15 to 17 ye… amer…  2930
 #> # … with 404 more rows
 ```
+
+Finally, you might want to simplify the age and race labels, since they
+are kind of verbose. `easycensus` provides a set of `tidy_*()` functions
+to assist with this.
+
+``` r
+d_cens %>%
+    mutate(race = tidy_race(race),
+           tidy_age_bins(age))
+#> # A tibble: 414 × 7
+#> # Groups:   GEOID, NAME, age [46]
+#>    GEOID       NAME                            age   race  value age_from age_to
+#>    <chr>       <chr>                           <fct> <fct> <dbl>    <dbl>  <dbl>
+#>  1 02180000100 Census Tract 1, Nome Census Ar… 10 t… aian   5240       10     14
+#>  2 02180000100 Census Tract 1, Nome Census Ar… 10 t… asian    10       10     14
+#>  3 02180000100 Census Tract 1, Nome Census Ar… 10 t… black    10       10     14
+#>  4 02180000100 Census Tract 1, Nome Census Ar… 10 t… hisp     30       10     14
+#>  5 02180000100 Census Tract 1, Nome Census Ar… 10 t… nhpi      0       10     14
+#>  6 02180000100 Census Tract 1, Nome Census Ar… 10 t… other     0       10     14
+#>  7 02180000100 Census Tract 1, Nome Census Ar… 10 t… two     230       10     14
+#>  8 02180000100 Census Tract 1, Nome Census Ar… 10 t… white   110       10     14
+#>  9 02180000100 Census Tract 1, Nome Census Ar… 10 t… whit…   100       10     14
+#> 10 02180000100 Census Tract 1, Nome Census Ar… 15 t… aian   2930       15     17
+#> # … with 404 more rows
+```
+
+Dive into the
+[reference](https://corymccartan.github.io/easycensus/reference/) to
+learn more!
 
 ## Installation
 

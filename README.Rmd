@@ -54,16 +54,29 @@ print(d_cens)
 `easycensus` is built on top of the great [`tidycensus`](https://walker-data.com/tidycensus/) package, so all of the usual arguments to those functions (including the ability to get shapefile information) work here, too.
 
 Once you've gotten your labelled data, it's easy to marginalize out the unneeded `sex` variable.
+You can either use `group_by()` and `summarize()` as usual, or you can use the `marginalize()` function in `easycensus`.
+This has the added advantage of automatically handling margins of error for ACS data.
 
 ```{r message=F}
 library(dplyr)
 
-d_cens %>%
+d_cens = d_cens %>%
     # Drop table margins. Can also use `drop_total=TRUE` in `get_dec_table()`
     filter(age != "total", race_ethnicity != "total") %>%
-    group_by(GEOID, age, race_ethnicity) %>%
-    summarize(value = sum(value))
+    marginalize(age, race=race_ethnicity)
+print(d_cens)
 ```
+
+Finally, you might want to simplify the age and race labels, since they are kind of verbose.
+`easycensus` provides a set of `tidy_*()` functions to assist with this.
+
+```{r}
+d_cens %>%
+    mutate(race = tidy_race(race),
+           tidy_age_bins(age))
+```
+
+Dive into the [reference](https://corymccartan.github.io/easycensus/reference/) to learn more!
 
 ## Installation
 

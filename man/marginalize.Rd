@@ -12,6 +12,16 @@ marginalize(data, ...)
 \item{...}{The variables of interest, which will be kept. Remaining variables
 will be marginalized out.}
 }
+\value{
+A new data frame that has had \code{\link[=group_by]{group_by()}} and \code{\link[=summarize]{summarize()}} applied.
+}
 \description{
-For ACS data, margins of error will be updated appropriately.
+For ACS data, margins of error will be updated appropriately, using
+\code{\link[tidycensus:moe_sum]{tidycensus::moe_sum()}}.
+}
+\examples{
+\dontrun{
+d_cens = get_acs_table("state", "B25042")
+marginalize(d_cens, bedrooms)
+}
 }

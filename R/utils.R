@@ -1,14 +1,24 @@
 #' Helper function to sum over nuisance variables
 #'
-#' For ACS data, margins of error will be updated appropriately.
+#' For ACS data, margins of error will be updated appropriately, using
+#' [tidycensus::moe_sum()].
 #'
 #' @param data The output of [get_dec_table()] or [get_acs_table()]
 #' @param ... The variables of interest, which will be kept. Remaining variables
 #'   will be marginalized out.
+#'
+#' @return A new data frame that has had [group_by()] and [summarize()] applied.
+#'
+#' @examples \dontrun{
+#' d_cens = get_acs_table("state", "B25042")
+#' marginalize(d_cens, bedrooms)
+#' }
+#' @export
 marginalize = function(data, ...) {
     if (is_sf <- inherits(data, "sf")) {
         rlang::check_installed("sf")
         geom_d = dplyr::distinct(dplyr::select(data, .data$GEOID))
+        requireNamespace("sf", quietly=TRUE)
         data = sf::st_drop_geometry(data)
     }
 
@@ -20,7 +30,7 @@ marginalize = function(data, ...) {
     } else { # decennial
         data = dplyr::summarize(
             dplyr::group_by(data, .data$GEOID, .data$NAME, ...),
-            estimate = sum(.data$estimate))
+            value = sum(.data$value))
     }
 
     if (is_sf) {
