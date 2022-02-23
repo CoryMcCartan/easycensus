@@ -16,15 +16,24 @@
     <loc>https://corymccartan.github.io/easycensus/index.html</loc>
   </url>
   <url>
+    <loc>https://corymccartan.github.io/easycensus/news/index.html</loc>
+  </url>
+  <url>
     <loc>https://corymccartan.github.io/easycensus/reference/easycensus-package.html</loc>
   </url>
   <url>
-    <loc>https://corymccartan.github.io/easycensus/reference/find_dec_table.html</loc>
+    <loc>https://corymccartan.github.io/easycensus/reference/find_table.html</loc>
   </url>
   <url>
-    <loc>https://corymccartan.github.io/easycensus/reference/get_dec_table.html</loc>
+    <loc>https://corymccartan.github.io/easycensus/reference/get_table.html</loc>
   </url>
   <url>
     <loc>https://corymccartan.github.io/easycensus/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://corymccartan.github.io/easycensus/reference/marginalize.html</loc>
+  </url>
+  <url>
+    <loc>https://corymccartan.github.io/easycensus/reference/reexports.html</loc>
   </url>
 </urlset>
