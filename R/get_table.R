@@ -1,30 +1,45 @@
 
-#' Download data from a decennial census table
+#' Download data from a decennial census or ACS table
 #'
 #' @param geography The geography level to download data for. Usually one of
-#'   `state`, `county`, `tract`, `block group`, `block`, `zcta`, etc.
+#'   `state`, `county`, `tract`, `block group`, `block`, `zcta`, etc. Consult
+#'   <https://walker-data.com/tidycensus/articles/basic-usage.html#geography-in-tidycensus>
+#'   for more information.
 #' @param table The table code to download. See [find_dec_table()] for help
 #'   identifying a table of interest. Note: some tables are split into
 #'   A/B/C/etc. versions by race; this function unifies all of these tables
 #'   under one code. So, for example, use `P012`, not `P012A`.
-#' @param ... Arguments passed to [tidycensus::get_decennial()], e.g. `year`,
-#'   `state`, `county`, `geometry`.
+#' @param ... Arguments passed to [tidycensus::get_decennial()] or
+#'   [tidycensus::get_acs()], e.g. `year`, `state`, `county`, `geometry`.
+#' @param survey For ACS data, whether to use the one-year, three-year, or
+#'   five-year survey (the default). Note that some tables from
+#'   [find_acs_table()] may only be available for `acs5`.
 #' @param drop_total Whether to filter out variables which are totals across
 #'   another variable. Recommended only after inspection of the underlying
 #'   table.
 #'
-#' @returns A tibble of decennial Census data in tidy format, with columns
-#'   `GEOID`, `NAME`, `variable` (containing the Census variable code), `value`,
+#' @returns A tibble of census data in tidy format, with columns
+#'   `GEOID`, `NAME`, `variable` (containing the Census variable code),
+#'   `value` or `estiamte`, `moe` in the case of ACS tables,
 #'   and additional factor columns specific to the table.
 #'
 #' @examples \dontrun{
 #' get_dec_table("state", "P003")
 #' get_dec_table("state", "H002")
-#' get_dec_table("state", "H002", drop_total=TRUE)
+#' get_dec_table("county", "H002", state="WA", drop_total=TRUE)
+#'
+#' get_acs_table("county subdivision", "B09001", state="WA", county="King")
 #' }
 #'
+#' @name get_table
+NULL
+
+#' @rdname get_table
 #' @export
 get_dec_table <- function(geography, table, ..., drop_total=FALSE) {
+    if (!table %in% names(tables_sf1))
+        cli_abort("Table {.field {table}} not found.")
+
     spec = tables_sf1[[table]]
     suppressMessages({
     tryCatch({
@@ -34,8 +49,35 @@ get_dec_table <- function(geography, table, ..., drop_total=FALSE) {
         }))
     },
     error = function(e) {
-        rlang::abort(e)
+        rlang::abort(e$message)
     })
+    })
+
+    tbl_vars = spec$vars
+    if (isTRUE(drop_total))
+        tbl_vars = dplyr::filter(tbl_vars, dplyr::if_all(-1, function(x) x != "total"))
+    dplyr::inner_join(d, tbl_vars, by="variable")
+}
+
+#' @rdname get_table
+#' @export
+get_acs_table <- function(geography, table, survey=c("acs5", "acs3", "acs1"),
+                          ..., drop_total=FALSE) {
+    if (!table %in% names(tables_acs5))
+        cli_abort("Table {.field {table}} not found.")
+    survey=match.arg(survey)
+
+    spec = tables_acs5[[table]]
+    suppressMessages({
+        tryCatch({
+            d = do.call(dplyr::bind_rows, lapply(spec$tables, function(tbl_code) {
+                tidycensus::get_acs(geography, variables=spec$vars$variable,
+                                    survey=survey, output="tidy", ...)
+            }))
+        },
+        error = function(e) {
+            rlang::abort(e$message)
+        })
     })
 
     tbl_vars = spec$vars

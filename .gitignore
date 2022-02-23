@@ -11,5 +11,6 @@ docs
 *.swp
 *.rds
 *.rda
+!R/sysdata.rda
 
 *_cache

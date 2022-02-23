@@ -10,15 +10,6 @@ vars_sf1 = tidycensus::load_variables(2010, "sf1") %>%
 
 # Handle repeated tables by race
 paren_race_re = "\\((WHITE|BLACK|AMERI|ASIAN|NATIVE|SOME OTHER|TWO OR|HISPANIC)[A-Z, ]+\\)"
-paren_race_names = c("(WHITE ALONE)"="white",
-                     "(BLACK OR AFRICAN AMERICAN ALONE)"="black",
-                     "(AMERICAN INDIAN AND ALASKA NATIVE ALONE)"="aian",
-                     "(ASIAN ALONE)"="asian",
-                     "(NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE)"="nhpi",
-                     "(SOME OTHER RACE ALONE)"="other",
-                     "(TWO OR MORE RACES)"="two",
-                     "(HISPANIC OR LATINO)"="hisp",
-                     "(WHITE ALONE, NOT HISPANIC OR LATINO)"="white_nh")
 
 # table name to list of nice variables
 parse_concept = function(concept) {
@@ -89,4 +80,6 @@ tables_sf1 = vars_sf1 %>%
     group_map(parse_table) %>%
     flatten()
 
-usethis::use_data(tables_sf1, overwrite=TRUE, compress="xz", internal=TRUE)
+# then go make tables_acs5
+usethis::use_data(tables_sf1, tables_acs5, overwrite=TRUE, compress="xz", internal=TRUE)
+rm(tables_sf1, tables_acs5)

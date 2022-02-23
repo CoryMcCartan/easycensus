@@ -1,25 +1,50 @@
-#' Find a decennial census table with variables of interest
+#' Find a decennial or ACS census table with variables of interest
 #'
-#' This function uses fuzzy matching to help identify SF1 tables from the census
+#' This function uses fuzzy matching to help identify tables from the census
 #' which contain variables of interest. Matched table codes are printed out,
 #' along with the Census-provided table description, the parsed variable names,
-#' and example table cells.
+#' and example table cells. The website <https://censusreporter.org/> may also
+#' be useful in finding variables.
 #'
 #' @param ... Variables to look for. These can be length-1 character vectors,
 #'   or, for convenience, can be left unquoted (see examples).
 #' @param show How many matching tables to show. Increase this to show more
-#'   possible matches, at the cost of more output.
+#'   possible matches, at the cost of more output. Negative values will be
+#'   converted to positive but will suppress any printing.
 #'
 #' @returns The codes for the top `show` tables, invisibly.
 #'
 #' @examples
 #' find_dec_table("sex", "age")
-#' find_dec_table(tenure, race, show=1)
+#' find_dec_table(tenure, race)
+#' find_acs_table("income", "sex", show=10)
+#' find_acs_table("heath care", show=-1)
 #'
+#' @name find_table
+NULL
+
+
+#' @rdname find_table
 #' @export
 find_dec_table <- function(..., show=2) {
     variables = str_to_upper(vapply(rlang::enquos(...), rlang::as_name, character(1)))
-    concepts = unlist(lapply(tables_sf1, function(tbl) {
+    best = utils::head(match_tables(variables, tables_sf1), abs(show))
+    if (show > 0) output_matching_tables(best, tables_sf1)
+    invisible(best)
+}
+
+#' @rdname find_table
+#' @export
+find_acs_table <- function(..., show=4) {
+    variables = str_to_upper(vapply(rlang::enquos(...), rlang::as_name, character(1)))
+    best = utils::head(match_tables(variables, tables_acs5, complex_pen=0.1), abs(show))
+    if (show > 0) output_matching_tables(best, tables_acs5)
+    invisible(best)
+}
+
+
+match_tables = function(variables, table_specs, complex_pen=0.5) {
+    concepts = unlist(lapply(table_specs, function(tbl) {
             paste(tbl$concept, paste(str_to_upper(tbl$dims), collapse=" "))
         }))
 
@@ -28,12 +53,10 @@ find_dec_table <- function(..., show=2) {
     avg_dists_2 = colMeans(adist(variables, concepts, costs=c(1, 1, 10), partial=FALSE))
     complexity = str_length(concepts)
     avg_dists = avg_dists_1/mean(avg_dists_1) +
-        0.5*complexity/mean(complexity) +
+        complex_pen*complexity/mean(complexity) +
         0.1*avg_dists_2/mean(avg_dists_2)
 
-    best = names(utils::head(sort(avg_dists), abs(show)))
-    if (show > 0) output_matching_tables(best, tables_sf1)
-    invisible(best)
+    names(sort(avg_dists))
 }
 
 

@@ -6,12 +6,15 @@
 \alias{easycensus-package}
 \title{easycensus: Quickly Extract and Marginalize U.S. Census Tables}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 Extracting desired data using the proper Census variable names can be time-consuming. This package takes the pain out of that process.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://corymccartan.github.io/easycensus/}
+  \item Report bugs at \url{https://github.com/CoryMcCartan/easycensus/issues}
 }
 
 }
