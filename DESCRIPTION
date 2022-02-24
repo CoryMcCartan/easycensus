@@ -1,10 +1,12 @@
 Package: easycensus
 Title: Quickly Extract and Marginalize U.S. Census Tables
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     person("Cory", "McCartan", email="cmccartan@g.harvard.edu", role=c("aut", "cre"))
 Description: Extracting desired data using the proper Census variable names can 
-    be time-consuming. This package takes the pain out of that process.
+    be time-consuming. This package takes the pain out of that process by 
+    providing functions to quickly locate variables and download labeled tables 
+    from the Census APIs (<https://www.census.gov/data/developers/data-sets.html>).
 Depends: 
     R (>= 2.10)
 Imports:
