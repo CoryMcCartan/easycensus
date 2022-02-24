@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Extracting desired data using the proper Census variable names can be time-consuming. This package takes the pain out of that process.
+Extracting desired data using the proper Census variable names can be time-consuming. This package takes the pain out of that process by providing functions to quickly locate variables and download labeled tables from the Census APIs (<https://www.census.gov/data/developers/data-sets.html>).
 }
 \seealso{
 Useful links:

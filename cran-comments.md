@@ -1,7 +1,8 @@
 # Resubmission
 
-In this resubmission, I have updated the DESCRIPTION field with a link to the
-relevant webservices, and provided more detail about the package functionality.
+In this resubmission, I have updated the DESCRIPTION description field with a
+link to the relevant webservices, and provided more detail about the package
+functionality.
 
 ## Test environments
 * local R installation (macOS), R 4.1.2
