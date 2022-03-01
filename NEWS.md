@@ -1,3 +1,13 @@
+# easycensus 0.3.1
+
+* Improve tidiers
+* Income bin tidiers
+
+
+# easycensus 0.2.0
+
+* CRAN resubmission
+
 # easycensus 0.2.0
 
 * Availability information for 1-year and 5-year ACS

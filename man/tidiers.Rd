@@ -6,6 +6,7 @@
 \alias{tidy_ethnicity}
 \alias{tidy_age}
 \alias{tidy_age_bins}
+\alias{tidy_income_bins}
 \alias{tidy_simplify}
 \alias{tidy_parens}
 \title{Tidy labels in census tables}
@@ -18,6 +19,8 @@ tidy_age(x)
 
 tidy_age_bins(x, as_factor = FALSE)
 
+tidy_income_bins(x, as_factor = FALSE)
+
 tidy_simplify(x)
 
 tidy_parens(x)
@@ -25,7 +28,7 @@ tidy_parens(x)
 \arguments{
 \item{x}{A factor, which will be re-leveled. Character vectors will be converted to factors.}
 
-\item{as_factor}{if \code{TRUE}, return a factor with levels of the form \verb{[10,14]}.}
+\item{as_factor}{if \code{TRUE}, return a factor with levels of the form \verb{[35,40]}.}
 }
 \value{
 A re-leveled factor, except for \code{\link[=tidy_age_bins]{tidy_age_bins()}}, which by default

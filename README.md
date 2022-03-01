@@ -5,12 +5,13 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/easycensus)](https://CRAN.R-project.org/package=easycensus)
 [![R-CMD-check](https://github.com/CoryMcCartan/easycensus/workflows/R-CMD-check/badge.svg)](https://github.com/CoryMcCartan/easycensus/actions)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 <!-- badges: end -->
 
 Extracting desired data using the proper Census variable names can be
@@ -150,18 +151,15 @@ learn more!
 
 ## Installation
 
-<!-- 
-You can install the released version of easycensus from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of easycensus from
+[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("easycensus")
 ```
 
-And the development version from [GitHub](https://github.com/) with:
--->
-
-You can install the development version from
-[GitHub](https://github.com/) with:
+Or install the development version from [GitHub](https://github.com/)
+with:
 
 ``` r
 # install.packages("devtools")

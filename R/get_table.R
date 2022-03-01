@@ -91,12 +91,8 @@ get_acs_table <- function(geography, table, year=2019, state=NULL, county=NULL,
         })
     })
 
-    tbl_vars = spec$vars
+    tbl_vars = dplyr::select(spec$vars, -dplyr::any_of(c("acs1", "acs5")))
     if (isTRUE(drop_total))
-        tbl_vars = dplyr::select(
-            dplyr::filter(tbl_vars,
-                          dplyr::if_all(-1, function(x) x != "total")),
-            -dplyr::any_of(c("acs1", "acs5"))
-        )
+        tbl_vars = dplyr::filter(tbl_vars, dplyr::if_all(-1, function(x) x != "total"))
     dplyr::inner_join(d, tbl_vars, by="variable")
 }

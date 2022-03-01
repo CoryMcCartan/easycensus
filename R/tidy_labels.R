@@ -71,7 +71,8 @@ tidy_age = function(x) {
 #' @export
 tidy_age_bins = function(x, as_factor=FALSE) {
     x = check_fc(x)
-    xlev = str_squish(str_remove(levels(x), "years?"))
+    xlev = str_remove(levels(x), "householder")
+    xlev = str_squish(str_remove(xlev, "years?"))
     xlev = str_replace(xlev, "under", "0 to")
     xlev = str_replace(xlev, "total", "0 to Inf")
     xlev = str_replace(xlev, "over", "Inf")
@@ -88,6 +89,35 @@ tidy_age_bins = function(x, as_factor=FALSE) {
     } else {
         close_br = dplyr::if_else(m[, 2] == Inf, ")", "]")
         levels(x) = str_glue("[{m[,1]},{m[,2]}{close_br}")
+        x
+    }
+}
+
+
+#' @param as_factor if `TRUE`, return a factor with levels of the form `[35,40]`.
+#' @rdname tidiers
+# @export # TODO re-export for 0.3.0
+tidy_income_bins = function(x, as_factor=FALSE) {
+    x = check_fc(x)
+    xlev = str_squish(str_remove_all(levels(x), "[$,]"))
+    xlev = str_replace(xlev, "less than", "0 to")
+    xlev = str_replace(xlev, "total", "0 to Inf")
+    xlev = str_replace(xlev, "or more", "to Inf")
+
+    m = str_split(xlev, " to ", simplify=TRUE)
+    if (ncol(m) != 2)
+        cli_abort("Problem parsing income categories: {.code {levels(x)}}")
+    m[m[, 2] == "", 2] = m[m[, 2] == "", 1]
+    nine_rows = str_ends(m[, 2], "999")
+    m = matrix(as.numeric(m), nrow=nrow(m))
+    m[nine_rows, 2] = m[nine_rows, 2] + 1
+    m = m / 1e3
+    colnames(m) = c("inc_from", "inc_to")
+
+    if (isFALSE(as_factor)) {
+        as_tibble(m[as.integer(x), , drop=FALSE])
+    } else {
+        levels(x) = str_glue("$[{m[,1]},{m[,2]})k")
         x
     }
 }

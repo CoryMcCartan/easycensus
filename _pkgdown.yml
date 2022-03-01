@@ -2,7 +2,10 @@ url: https://corymccartan.github.io/easycensus/
 template:
   bootstrap: 5
   bootswatch: flatly
+  ganalytics: UA-79274202-5
 navbar:
   type: dark
-
+authors:
+  Cory McCartan:
+    href: https://corymccartan.github.io/
 
