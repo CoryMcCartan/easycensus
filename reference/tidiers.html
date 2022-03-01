@@ -22,7 +22,7 @@ tidy_parens() attempts to simplify labels by removing all terms in parentheses.
     
     <a class="navbar-brand me-2" href="../index.html">easycensus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,6 +74,8 @@ Most produce straightforward output, but there are several more generic tidiers:
 
 <span class="fu">tidy_age_bins</span><span class="op">(</span><span class="va">x</span>, as_factor <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
+<span class="fu">tidy_income_bins</span><span class="op">(</span><span class="va">x</span>, as_factor <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+
 <span class="fu">tidy_simplify</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 
 <span class="fu">tidy_parens</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
@@ -84,7 +86,7 @@ Most produce straightforward output, but there are several more generic tidiers:
     <dl><dt>x</dt>
 <dd><p>A factor, which will be re-leveled. Character vectors will be converted to factors.</p></dd>
 <dt>as_factor</dt>
-<dd><p>if <code>TRUE</code>, return a factor with levels of the form <code>[10,14]</code>.</p></dd>
+<dd><p>if <code>TRUE</code>, return a factor with levels of the form <code>[35,40]</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -126,7 +128,7 @@ returns a data frame with columns <code>age_from</code> and <code>age_to</code> 
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Cory McCartan.</p>
+  <p></p><p>Developed by <a href="https://corymccartan.github.io/" class="external-link">Cory McCartan</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

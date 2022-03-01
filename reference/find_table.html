@@ -18,7 +18,7 @@ be useful in finding variables."><meta property="og:image" content="https://cory
     
     <a class="navbar-brand me-2" href="../index.html">easycensus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,9 +95,9 @@ converted to positive but will suppress any printing.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">age</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">race_ethnicity</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Example values:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • male / 22 to 24 years / two or more races</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • female / 45 to 49 years / asian alone</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • female / 35 to 39 years / native hawaiian and other pacific islander alone</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • male / 67 to 69 years / black or african american alone</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • male / 25 to 29 years / two or more races</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • male / 5 to 9 years / black or african american alone</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;"> PCT012  - SEX BY AGE</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Parsed variables:</span>
@@ -105,10 +105,9 @@ converted to positive but will suppress any printing.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">age</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">race_ethnicity</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Example values:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • female / 110 years and over / american indian and alaska native alone, not</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> hispanic or latino</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • female / 70 years / black or african american alone</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • male / 15 years / native hawaiian and other pacific islander alone</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • female / 16 years / two or more races</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • male / 9 years / native hawaiian and other pacific islander alone</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • female / 27 years / native hawaiian and other pacific islander alone</span>
 <span class="r-in"><span class="fu">find_dec_table</span><span class="op">(</span><span class="va">tenure</span>, <span class="va">race</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Top 2 matching tables</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span>
@@ -118,9 +117,10 @@ converted to positive but will suppress any printing.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">tenure</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">race_of_householder</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Example values:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • owner occupied / householder who is asian alone</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • renter occupied / householder who is some other race alone</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • renter occupied / householder who is asian alone</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • owner occupied / householder who is american indian and alaska native alone</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • renter occupied / householder who is native hawaiian and other pacific</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> islander alone</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;"> H016  - TENURE BY HOUSEHOLD SIZE</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Parsed variables:</span>
@@ -128,10 +128,10 @@ converted to positive but will suppress any printing.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">household_size</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">race_ethnicity</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Example values:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • renter occupied / 4-person household / total</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • renter occupied / 6-person household / black or african american alone</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • renter occupied / 1-person household / total</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • renter occupied / 2-person household / black or african american alone</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> householder</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • renter occupied / 6-person household / hispanic or latino householder</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • owner occupied / 5-person household / total</span>
 <span class="r-in"><span class="fu">find_acs_table</span><span class="op">(</span><span class="st">"income"</span>, <span class="st">"sex"</span>, show<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Top 3 matching tables</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span>
@@ -144,9 +144,9 @@ converted to positive but will suppress any printing.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Parsed variables:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">sex</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Example values:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • female (dollars)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • total</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • male (dollars)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • female (dollars)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;"> B19216  - AGGREGATE NONFAMILY HOUSEHOLD INCOME IN THE PAST 12 MONTHS (IN 2019</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">INFLATION-ADJUSTED DOLLARS) BY SEX OF HOUSEHOLDER BY LIVING ALONE BY AGE OF</span></span>
@@ -159,10 +159,10 @@ converted to positive but will suppress any printing.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">living_alone</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">age_of_householder</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Example values:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • total / total / total</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • male householder (dollars) / total / total</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • female householder (dollars) / not living alone (dollars) / householder 65</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> years and over (dollars)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • male householder (dollars) / total / total</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • male householder (dollars) / living alone (dollars) / total</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;"> B21004  - MEDIAN INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">DOLLARS) BY VETERAN STATUS BY SEX FOR THE CIVILIAN POPULATION 18 YEARS AND OVER</span></span>
@@ -174,9 +174,9 @@ converted to positive but will suppress any printing.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">veteran_status</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">sex_for_the_civilian_population_18_years_over_with_income</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Example values:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • nonveteran / male</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • veteran / male</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • veteran / total</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • nonveteran / male</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • nonveteran / female</span>
 <span class="r-in"><span class="fu">find_acs_table</span><span class="op">(</span><span class="st">"heath care"</span>, show<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
 <span class="r-in"></span>
 </code></pre></div>
@@ -186,7 +186,7 @@ converted to positive but will suppress any printing.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Cory McCartan.</p>
+  <p></p><p>Developed by <a href="https://corymccartan.github.io/" class="external-link">Cory McCartan</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
