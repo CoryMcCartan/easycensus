@@ -1,5 +1,7 @@
-# easycensus 0.3.1
+# easycensus 1.0.0
 
+* Use `censusapi` instead of `tidycensus` for fewer dependencies
+* New `estimate` vector type that tracks uncertainty through mathematical operations 
 * Improve tidiers
 * Income bin tidiers
 

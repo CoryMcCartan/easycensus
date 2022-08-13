@@ -5,9 +5,10 @@
 # roxygen namespace tags. Modify with care!
 #' @import stringr
 #' @import cli
-#' @importFrom dplyr as_tibble
+#' @importFrom dplyr as_tibble if_else
 #' @importFrom rlang .data
 #' @importFrom utils adist
+#' @importFrom stats qnorm
 ## usethis namespace: start
 ## usethis namespace: end
 NULL

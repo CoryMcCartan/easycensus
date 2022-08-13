@@ -1,6 +1,6 @@
 Package: easycensus
 Title: Quickly Extract and Marginalize U.S. Census Tables
-Version: 0.2.1
+Version: 1.0.0
 Authors@R: 
     person("Cory", "McCartan", email="cmccartan@g.harvard.edu", role=c("aut", "cre"))
 Description: Extracting desired data using the proper Census variable names can 
@@ -11,20 +11,24 @@ Depends:
     R (>= 2.10)
 Imports:
     rlang,
+    vctrs,
+    pillar,
     dplyr (>= 1.0.0),
     stringr,
     tidycensus,
+    censusapi,
     cli
 Suggests:
     testthat (>= 3.0.0),
+    posterior,
     sf,
     purrr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
-URL: https://corymccartan.github.io/easycensus/
+RoxygenNote: 7.2.1
+URL: https://corymccartan.com/easycensus/
 BugReports: https://github.com/CoryMcCartan/easycensus/issues
 Config/testthat/edition: 3
 Language: en-US

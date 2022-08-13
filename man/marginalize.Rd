@@ -17,7 +17,7 @@ A new data frame that has had \code{\link[=group_by]{group_by()}} and \code{\lin
 }
 \description{
 For ACS data, margins of error will be updated appropriately, using
-\code{\link[tidycensus:moe_sum]{tidycensus::moe_sum()}}.
+the functionality in \code{\link[=estimate]{estimate()}}.
 }
 \examples{
 \dontrun{

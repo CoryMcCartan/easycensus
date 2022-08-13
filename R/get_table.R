@@ -91,6 +91,12 @@ get_acs_table <- function(geography, table, year=2019, state=NULL, county=NULL,
         })
     })
 
+    d = dplyr::transmute(d,
+                         GEOID = .data$GEOID,
+                         NAME = .data$NAME,
+                         variable = .data$variable,
+                         value = .env$estimate(.data$estimate, moe=.data$moe))
+
     tbl_vars = dplyr::select(spec$vars, -dplyr::any_of(c("acs1", "acs5")))
     if (isTRUE(drop_total))
         tbl_vars = dplyr::filter(tbl_vars, dplyr::if_all(-1, function(x) x != "total"))
