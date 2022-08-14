@@ -1,9 +1,3 @@
-# Resubmission
-
-In this resubmission, I have updated the DESCRIPTION description field with a
-link to the relevant webservices, and provided more detail about the package
-functionality.
-
 ## Test environments
 * local R installation (macOS), R 4.1.2
 * ubuntu-latest (on GitHub Actions), (release)
@@ -11,8 +5,7 @@ functionality.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
-* This is a new release.
-* Examples are \dontrun in the `get_*_table()` and `marginalize()` functions
+* Examples are \dontrun in `cens_get_*()`, `cens_parse_tables()`, and `cens_margin_to()` 
 since these require an API key and may take more than a few seconds to download.

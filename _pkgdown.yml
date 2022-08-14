@@ -1,4 +1,4 @@
-url: https://corymccartan.github.io/easycensus/
+url: https://corymccartan.com/easycensus/
 template:
   bootstrap: 5
   bootswatch: flatly
@@ -7,5 +7,5 @@ navbar:
   type: dark
 authors:
   Cory McCartan:
-    href: https://corymccartan.github.io/
+    href: https://corymccartan.com/
 

@@ -3,11 +3,14 @@
 \name{estimate}
 \alias{estimate}
 \alias{is_estimate}
+\alias{as_estimate}
 \title{Estimate class}
 \usage{
 estimate(x, se = NULL, moe = NULL, conf = 0.9)
 
 is_estimate(x)
+
+as_estimate(x)
 }
 \arguments{
 \item{x}{A numeric vector containing the estimate(s).}
@@ -27,7 +30,10 @@ An \code{estimate} vector.
 }
 \description{
 A numeric vector that stores margin-of-error information along with it.
-The margin of error will update through basic arithmetic operations.
+The margin of error will update through basic arithmetic operations, using a
+first-order Taylor series approximation. The implicit assumption is that the
+errors in each value are uncorrelated. If in fact there is correlation, the
+margins of error could be wildly under- or over-estimated.
 }
 \examples{
 estimate(5, 2) # 5 plus-or-minus 2

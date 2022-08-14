@@ -4,6 +4,7 @@
 \alias{get_est}
 \alias{get_se}
 \alias{get_moe}
+\alias{to_rvar}
 \title{Extract estimates, standard errors, and margins of error}
 \usage{
 get_est(x)
@@ -11,21 +12,40 @@ get_est(x)
 get_se(x)
 
 get_moe(x, conf = 0.9)
+
+to_rvar(x, n = 500)
 }
 \arguments{
 \item{x}{An \link{estimate} vector.}
 
 \item{conf}{The confidence level to use in constructing the margin of error.}
+
+\item{n}{How many samples to draw.}
 }
 \value{
 An \link{estimate} vector.
+
+A \link[posterior:rvar]{posterior::rvar} vector.
 }
 \description{
 Getter functions for \code{\link[=estimate]{estimate()}} vectors.
+
+The \link[posterior:rvar]{posterior::rvar} class may be useful in handling standard errors for
+more complicated mathematical expressions. This function assumes a Normal
+distribution centered on the estimate, with standard deviation equal to the
+standard error of the estimate. The \code{posterior} package is required for this
+function.
 }
 \examples{
 x = estimate(1, 0.1)
 get_est(x)
 get_moe(x)
+
+x = estimate(1, 0.1)
+if (requireNamespace("posterior", quietly=TRUE)) {
+    rv_x = to_rvar(x)
+    (rv_x^2 / rv_x) - rv_x # std. errors zero (correct)
+    x^2 / x - x # std. errors not zero
+}
 
 }

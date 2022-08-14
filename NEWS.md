@@ -1,10 +1,10 @@
 # easycensus 1.0.0
 
+* Core functions renamed for a consistent `cens_` prefix
 * Use `censusapi` instead of `tidycensus` for fewer dependencies
 * New `estimate` vector type that tracks uncertainty through mathematical operations 
-* Improve tidiers
-* Income bin tidiers
-
+* Expose parsed tables to users with a new `cens_table` type
+* Improve tidiers, including income bin tidiers
 
 # easycensus 0.2.0
 

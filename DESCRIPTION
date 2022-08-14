@@ -14,6 +14,7 @@ Imports:
     vctrs,
     pillar,
     dplyr (>= 1.0.0),
+    tidyr (>= 1.0.0),
     stringr,
     tidycensus,
     censusapi,
@@ -21,8 +22,7 @@ Imports:
 Suggests:
     testthat (>= 3.0.0),
     posterior,
-    sf,
-    purrr
+    sf
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

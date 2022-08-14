@@ -9,7 +9,19 @@
 \arguments{
 \item{x}{An \link{estimate} vector}
 
+\item{conf}{The confidence level to use in converting the margin of error to
+a standard error. Defaults to 90\%, which is what the Census Bureau uses for
+ACS estimates.}
+
 \item{digits}{The number of dig}
+
+\item{trim}{logical; if \code{FALSE}, logical, numeric and complex values are
+right-justified to a common width: if \code{TRUE} the leading blanks for
+justification are suppressed.}
+
+\item{...}{Ignored.}
+
+\item{formatter}{the formatting function to use internally}
 }
 \description{
 Format an estimate for pretty printing

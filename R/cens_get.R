@@ -1,15 +1,14 @@
 
 #' Download data from a decennial census or ACS table
 #'
-#' Leverages [tidycensus::get_decennial()] and [tidycensus::get_acs()] to
-#' download tables of census data. Tables are returned in tidy format, with
-#' variables given tidy, human-readable names.
+#' Leverages [censusapi::getCensus()] to download tables of census data. Tables
+#' are returned in tidy format, with variables given tidy, human-readable names.
 #'
 #' @param geography The geography level to download data for. Usually one of
 #'   `state`, `county`, `tract`, `block group`, `block`, `zcta`, etc. Consult
 #'   <https://walker-data.com/tidycensus/articles/basic-usage.html#geography-in-tidycensus>
 #'   for more information.
-#' @param table The table code to download. See [find_dec_table()] for help
+#' @param table The table code to download. See [cens_find_dec()] for help
 #'   identifying a table of interest. Note: some tables are split into
 #'   A/B/C/etc. versions by race; this function unifies all of these tables
 #'   under one code. So, for example, use `P012`, not `P012A`.
@@ -18,7 +17,7 @@
 #' @param year For ACS data, the survey year to get data for.
 #' @param survey For ACS data, whether to use the one-year or
 #'   five-year survey (the default). Make sure to check availability using
-#'   [find_acs_table()].
+#'   [cens_find_acs()].
 #' @param ... Further arguments passed to [tidycensus::get_decennial()] or
 #'   [tidycensus::get_acs()], e.g. `year`, `state`, `county`, `geometry`.
 #' @param drop_total Whether to filter out variables which are totals across
@@ -31,19 +30,19 @@
 #'   and additional factor columns specific to the table.
 #'
 #' @examples \dontrun{
-#' get_dec_table("state", "P003")
-#' get_dec_table("state", "H002")
-#' get_dec_table("county", "H002", state="WA", drop_total=TRUE)
+#' cens_get_dec("state", "P003")
+#' cens_get_dec("state", "H002")
+#' cens_get_dec("county", "H002", state="WA", drop_total=TRUE)
 #'
-#' get_acs_table("county subdivision", "B09001", state="WA", county="King")
+#' cens_get_acs("county subdivision", "B09001", state="WA", county="King")
 #' }
 #'
-#' @name get_table
+#' @name cens_get
 NULL
 
-#' @rdname get_table
+#' @rdname cens_get
 #' @export
-get_dec_table <- function(geography, table, state=NULL, county=NULL,
+cens_get_dec <- function(geography, table, state=NULL, county=NULL,
                           ..., drop_total=FALSE) {
     if (!table %in% names(tables_sf1))
         cli_abort("Table {.field {table}} not found.")
@@ -68,9 +67,9 @@ get_dec_table <- function(geography, table, state=NULL, county=NULL,
     dplyr::inner_join(d, tbl_vars, by="variable")
 }
 
-#' @rdname get_table
+#' @rdname cens_get
 #' @export
-get_acs_table <- function(geography, table, year=2019, state=NULL, county=NULL,
+cens_get_acs <- function(geography, table, year=2019, state=NULL, county=NULL,
                           survey=c("acs5", "acs1"), ..., drop_total=FALSE) {
     if (!table %in% names(tables_acs))
         cli_abort("Table {.field {table}} not found.")

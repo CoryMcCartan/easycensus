@@ -1,7 +1,7 @@
 test_that("decennial tables can be downloaded", {
-    check_api()
+    skip_if(is.null(cens_auth_env()), "Census API not available")
 
-    d = get_dec_table("county", "P004", state="RI")
+    d = cens_get_dec("county", "P4", state="RI")
     expect_s3_class(d, "data.frame")
     expect_equal(length(unique(d$GEOID)), 5)
     expect_true(any(grepl("hispanic", names(d))))

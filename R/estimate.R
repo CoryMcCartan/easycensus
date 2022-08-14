@@ -10,7 +10,10 @@ NULL
 #' Estimate class
 #'
 #' A numeric vector that stores margin-of-error information along with it.
-#' The margin of error will update through basic arithmetic operations.
+#' The margin of error will update through basic arithmetic operations, using a
+#' first-order Taylor series approximation. The implicit assumption is that the
+#' errors in each value are uncorrelated. If in fact there is correlation, the
+#' margins of error could be wildly under- or over-estimated.
 #'
 #' @param x A numeric vector containing the estimate(s).
 #' @param se A numeric vector containing the standard error(s) for the
@@ -120,7 +123,7 @@ get_moe = function(x, conf = 0.9) {
 #'
 #' @examples
 #' x = estimate(1, 0.1)
-#' if (requireNamespace("posterior"), quietly=TRUE) {
+#' if (requireNamespace("posterior", quietly=TRUE)) {
 #'     rv_x = to_rvar(x)
 #'     (rv_x^2 / rv_x) - rv_x # std. errors zero (correct)
 #'     x^2 / x - x # std. errors not zero
@@ -165,6 +168,7 @@ vec_cast.estimate.double = function(x, to, ...) estimate(x, se=0.0)
 #' @export
 vec_cast.estimate.integer = function(x, to, ...) estimate(as.double(x), se=0.0)
 
+#' @rdname estimate
 #' @export
 as_estimate <- function(x) {
     vec_cast(x, new_estimate())
@@ -174,8 +178,7 @@ as_estimate <- function(x) {
 # Equality / comparison -------
 
 #' @export
-vec_proxy_compare = function(x, ...) field(x, "est")
-
+vec_proxy_compare.estimate = function(x, ...) field(x, "est")
 
 
 # Math -------
@@ -216,10 +219,11 @@ vec_arith.estimate.estimate = function(op, x, y, ...) {
 #' @method vec_arith.estimate numeric
 #' @export
 vec_arith.estimate.numeric = function(op, x, y, ...) {
-    est_x = field(x, "est")
-    se_x = field(x, "se")
-    n = length(est_x)
-    y = vec_recycle(y, n)
+    recyc = vec_recycle_common(x=x, y=y)
+    est_x = field(recyc$x, "est")
+    se_x = field(recyc$x, "se")
+    y = recyc$y
+    n = length(y)
 
     switch(
         op,
@@ -227,8 +231,11 @@ vec_arith.estimate.numeric = function(op, x, y, ...) {
         "-" = new_estimate(est_x - y, se_x),
         "*" = new_estimate(est_x * y, se_x * y),
         "/" = new_estimate(est_x / y, se_x / y),
-        "^" = if_else(y == 1, x,
-                      new_estimate(est_x ^ y, y * est_x^(y-1) * se_x)
+        "^" = if_else(y == 0,
+                      new_estimate(rep(1, n), rep(0, n)),
+                      if_else(y == 1, recyc$x,
+                              new_estimate(est_x ^ y, y * est_x^(y-1) * se_x)
+                      )
         ),
         stop_incompatible_op(op, x, y)
     )
@@ -236,10 +243,11 @@ vec_arith.estimate.numeric = function(op, x, y, ...) {
 #' @method vec_arith.numeric estimate
 #' @export
 vec_arith.numeric.estimate = function(op, x, y, ...) {
-    est_y = field(y, "est")
-    se_y = field(y, "se")
-    n = length(est_y)
-    x = vec_recycle(x, n)
+    recyc = vec_recycle_common(x=x, y=y)
+    est_y = field(recyc$y, "est")
+    se_y = field(recyc$y, "se")
+    x = recyc$x
+    n = length(x)
 
     switch(
         op,
@@ -334,7 +342,7 @@ est_prop = function(x, y) {
 
     new_var = se_x^2 - (est_x / est_y)^2 * se_y^2
     new_var = if_else(new_var >= 0, new_var,
-                      new_var = se_x^2 + (est_x / est_y)^2 * se_y^2)
+                      se_x^2 + (est_x / est_y)^2 * se_y^2)
     new_estimate(est_x / est_y, sqrt(new_var))
 }
 
@@ -352,7 +360,15 @@ est_pct_chg = function(x, y) {
 #' Format an estimate for pretty printing
 #'
 #' @param x An [estimate] vector
+#' @param conf The confidence level to use in converting the margin of error to
+#'   a standard error. Defaults to 90%, which is what the Census Bureau uses for
+#'   ACS estimates.
 #' @param digits The number of dig
+#' @param trim logical; if `FALSE`, logical, numeric and complex values are
+#'   right-justified to a common width: if `TRUE` the leading blanks for
+#'   justification are suppressed.
+#' @param ... Ignored.
+#' @param formatter the formatting function to use internally
 #'
 #' @export
 format.estimate = function(x, conf = 0.9, digits = 2, trim = FALSE, ..., formatter=fmt_plain) {
@@ -364,13 +380,13 @@ format.estimate = function(x, conf = 0.9, digits = 2, trim = FALSE, ..., formatt
 fmt_plain = function(x, conf=0.9, digits=2, trim=FALSE) {
     est = fmt_est(field(x, "est"), digits=digits, trim=trim)
     moe = fmt_moe(field(x, "se"), conf=conf, digits=digits, trim=trim)
-    str_c(est, " ± ", moe)
+    str_c(est, " \u00B1 ", moe)
 }
 
 fmt_color = function(x, conf=0.9, digits=2, trim=FALSE) {
     est = fmt_est(field(x, "est"), digits=digits, trim=trim)
     moe = fmt_moe(field(x, "se"), conf=conf, digits=digits, trim=trim)
-    str_c(est, pillar::style_subtle(str_c(" ± ", moe)))
+    str_c(est, pillar::style_subtle(str_c(" \u00B1 ", moe)))
 }
 
 fmt_est = function(x, digits=2, trim=FALSE) {
