@@ -44,9 +44,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="find-tables">Find Tables<a class="anchor" aria-label="anchor" href="#find-tables"></a></h2>
       
-      
+      <p class="section-desc"></p><p>Functions to parse and locate tables with variables of interest</p>
 
       
     </div><div id="" class="section level2">
@@ -56,20 +56,31 @@
 
       <dl><dt>
           
-          <code><a href="cens_auth.html">cens_auth()</a></code> 
-        </dt>
-        <dd>Authorize use of the Census API</dd>
-      </dl><dl><dt>
-          
           <code><a href="cens_find.html">cens_find_dec()</a></code> <code><a href="cens_find.html">cens_find_acs()</a></code> 
         </dt>
         <dd>Find a decennial or ACS census table with variables of interest</dd>
       </dl><dl><dt>
           
-          <code><a href="cens_geo.html">cens_geo()</a></code> 
+          <code><a href="cens_parse_tables.html">cens_parse_tables()</a></code> 
         </dt>
-        <dd>Construct a Geography Specification for Census Data</dd>
+        <dd>Attempt to Parse Tables from a Census API</dd>
       </dl><dl><dt>
+          
+          <code><a href="tables.html">tables_sf1</a></code> <code><a href="tables.html">tables_acs</a></code> 
+        </dt>
+        <dd>Parsed Census SF1 and ACS Tables</dd>
+      </dl></div><div class="section level2">
+      <h2 id="get-data">Get Data<a class="anchor" aria-label="anchor" href="#get-data"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions to download and clean up data for a specific table and geography</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="cens_get.html">cens_get_dec()</a></code> <code><a href="cens_get.html">cens_get_acs()</a></code> 
         </dt>
@@ -81,14 +92,25 @@
         <dd>Helper function to sum over nuisance variables</dd>
       </dl><dl><dt>
           
-          <code><a href="cens_parse_tables.html">cens_parse_tables()</a></code> 
+          <code><a href="tidiers.html">tidy_race()</a></code> <code><a href="tidiers.html">tidy_race_detailed()</a></code> <code><a href="tidiers.html">tidy_ethnicity()</a></code> <code><a href="tidiers.html">tidy_age()</a></code> <code><a href="tidiers.html">tidy_age_bins()</a></code> <code><a href="tidiers.html">tidy_income_bins()</a></code> <code><a href="tidiers.html">tidy_simplify()</a></code> <code><a href="tidiers.html">tidy_parens()</a></code> 
         </dt>
-        <dd>Attempt to Parse Tables from a Census API</dd>
-      </dl><dl><dt>
+        <dd>Tidy labels in census tables</dd>
+      </dl></div><div class="section level2">
+      <h2 id="work-with-noisy-estimates">Work with Noisy Estimates<a class="anchor" aria-label="anchor" href="#work-with-noisy-estimates"></a></h2>
+      
+      <p class="section-desc"></p><p>A data type that keeps track of margins of error</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
-          <code><a href="est_extract.html">get_est()</a></code> <code><a href="est_extract.html">get_se()</a></code> <code><a href="est_extract.html">get_moe()</a></code> <code><a href="est_extract.html">to_rvar()</a></code> 
+          <code><a href="estimate.html">estimate()</a></code> <code><a href="estimate.html">is_estimate()</a></code> <code><a href="estimate.html">as_estimate()</a></code> 
         </dt>
-        <dd>Extract estimates, standard errors, and margins of error</dd>
+        <dd>Estimate class</dd>
       </dl><dl><dt>
           
           <code><a href="est_special.html">est_prop()</a></code> <code><a href="est_special.html">est_pct_chg()</a></code> 
@@ -96,26 +118,38 @@
         <dd>Specialized margin-of-error calculations</dd>
       </dl><dl><dt>
           
-          <code><a href="estimate.html">estimate()</a></code> <code><a href="estimate.html">is_estimate()</a></code> <code><a href="estimate.html">as_estimate()</a></code> 
+          <code><a href="est_extract.html">get_est()</a></code> <code><a href="est_extract.html">get_se()</a></code> <code><a href="est_extract.html">get_moe()</a></code> <code><a href="est_extract.html">to_rvar()</a></code> 
         </dt>
-        <dd>Estimate class</dd>
+        <dd>Extract estimates, standard errors, and margins of error</dd>
       </dl><dl><dt>
           
           <code><a href="format.estimate.html">format(<i>&lt;estimate&gt;</i>)</a></code> 
         </dt>
         <dd>Format an estimate</dd>
+      </dl></div><div class="section level2">
+      <h2 id="miscellaneous">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous"></a></h2>
+      
+      <p class="section-desc"></p><p>Other package functions</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="cens_geo.html">cens_geo()</a></code> 
+        </dt>
+        <dd>Construct a Geography Specification for Census Data</dd>
       </dl><dl><dt>
           
-          <code><a href="tables.html">tables_sf1</a></code> <code><a href="tables.html">tables_acs</a></code> 
+          <code><a href="cens_auth.html">cens_auth()</a></code> 
         </dt>
-        <dd>Parsed Census SF1 and ACS Tables</dd>
-      </dl><dl><dt>
-          
-          <code><a href="tidiers.html">tidy_race()</a></code> <code><a href="tidiers.html">tidy_ethnicity()</a></code> <code><a href="tidiers.html">tidy_age()</a></code> <code><a href="tidiers.html">tidy_age_bins()</a></code> <code><a href="tidiers.html">tidy_income_bins()</a></code> <code><a href="tidiers.html">tidy_simplify()</a></code> <code><a href="tidiers.html">tidy_parens()</a></code> 
-        </dt>
-        <dd>Tidy labels in census tables</dd>
+        <dd>Authorize use of the Census API</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
