@@ -11,13 +11,13 @@ tables_acs = lapply(all_vars, function(nm) {
     vars5 = tables_acs5[[nm]]$vars$variable
     if (length(vars1) == length(vars5)) {
         out = tables_acs1[[nm]]
-        out$surveys = c("acs1", "acs5")
+        out$surveys = c("acs/acs1", "acs/acs5")
     } else if (length(vars1) > length(vars5)) {
         out = tables_acs1[[nm]]
-        out$surveys = "acs1"
+        out$surveys = "acs/acs1"
     } else {
         out = tables_acs5[[nm]]
-        out$surveys = "acs5"
+        out$surveys = "acs/acs5"
     }
     out
 })

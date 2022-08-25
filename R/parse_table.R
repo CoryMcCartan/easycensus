@@ -45,12 +45,11 @@ NULL
 #'
 cens_parse_tables = function(api, year) {
     vars = get_survey_vars(api, year)
-    survey = str_split(api, "/")[[1]][2]
 
     dplyr::group_map(vars, parse_table) %>%
         unlist(recursive=FALSE) %>%
         lapply(function(x) {
-            x$surveys = survey
+            x$surveys = api
             x
         }) %>%
         lapply(new_cens_table)

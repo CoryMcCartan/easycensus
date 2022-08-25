@@ -7,46 +7,54 @@
 \title{Download data from a decennial census or ACS table}
 \usage{
 cens_get_dec(
-  geography,
   table,
-  state = NULL,
-  county = NULL,
+  geo = NULL,
   ...,
-  drop_total = FALSE
+  check_geo = FALSE,
+  drop_total = FALSE,
+  show_call = FALSE
 )
 
 cens_get_acs(
-  geography,
   table,
-  year = 2019,
-  state = NULL,
-  county = NULL,
-  survey = c("acs5", "acs1"),
+  geo = NULL,
   ...,
-  drop_total = FALSE
+  year = 2019,
+  survey = c("acs5", "acs1"),
+  check_geo = FALSE,
+  drop_total = FALSE,
+  show_call = FALSE
 )
 }
 \arguments{
-\item{geography}{The geography level to download data for. Usually one of
-\code{state}, \code{county}, \code{tract}, \verb{block group}, \code{block}, \code{zcta}, etc. Consult
-\url{https://walker-data.com/tidycensus/articles/basic-usage.html#geography-in-tidycensus}
-for more information.}
+\item{table}{The table to download, either as a character vector or a table
+object as produced by \code{\link[=cens_find_dec]{cens_find_dec()}},  \code{\link[=cens_find_acs]{cens_find_acs()}} or
+\code{\link[=cens_parse_tables]{cens_parse_tables()}}, or as included in \code{tables_dec} and \code{tables_acs}.
+Note: some tables are split into A/B/C/etc. versions by race; this function
+unifies all of these tables under one code. So, for example, use \code{P012},
+not \code{P012A}.}
 
-\item{table}{The table code to download. See \code{\link[=cens_find_dec]{cens_find_dec()}} for help
-identifying a table of interest. Note: some tables are split into
-A/B/C/etc. versions by race; this function unifies all of these tables
-under one code. So, for example, use \code{P012}, not \code{P012A}.}
+\item{geo}{The geographic level to return. One of the machine-readable or
+human-readable names listed in the "Details" section of \code{\link[=cens_geo]{cens_geo()}}. Will
+return all matching geographies of this level, as filtered by the further
+arguments to \code{...}.  For example, setting \code{geo="tract"} is equivalent to
+setting \code{tract="all"}.}
 
-\item{state}{The state to get data for, if any.}
+\item{...}{Geographies to return, as supported by the Census API. Order
+matters here---the first argument will be the geographic level to return
+(i.e., it corresponds to the \code{geo} argument) and additional arguments will
+filter the results. Use \code{"all"}, \code{"*"}, \code{NA}, or \code{TRUE} to return all units
+of a particular geography.  See the examples of \code{\link[=cens_geo]{cens_geo()}} for details.}
 
-\item{county}{The state to get data for, if any.}
-
-\item{...}{Further arguments passed to \code{\link[tidycensus:get_decennial]{tidycensus::get_decennial()}} or
-\code{\link[tidycensus:get_acs]{tidycensus::get_acs()}}, e.g. \code{year}, \code{state}, \code{county}, \code{geometry}.}
+\item{check_geo}{If \code{TRUE}, validate the provided geographies against the
+available geographies from the relevant Census API.}
 
 \item{drop_total}{Whether to filter out variables which are totals across
 another variable. Recommended only after inspection of the underlying
 table.}
+
+\item{show_call}{Whether to show the actual call to the Census API. May be
+useful for debugging.}
 
 \item{year}{For ACS data, the survey year to get data for.}
 
@@ -61,17 +69,16 @@ A tibble of census data in tidy format, with columns
 and additional factor columns specific to the table.
 }
 \description{
-Leverages \code{\link[tidycensus:get_decennial]{tidycensus::get_decennial()}} and \code{\link[tidycensus:get_acs]{tidycensus::get_acs()}} to
-download tables of census data. Tables are returned in tidy format, with
-variables given tidy, human-readable names.
+Leverages \code{\link[censusapi:getCensus]{censusapi::getCensus()}} to download tables of census data. Tables
+are returned in tidy format, with variables given tidy, human-readable names.
 }
 \examples{
 \dontrun{
-cens_get_dec("state", "P003")
-cens_get_dec("state", "H002")
-cens_get_dec("county", "H002", state="WA", drop_total=TRUE)
+cens_get_dec("P3", "state")
+cens_get_dec(tables_sf1$H2, "state")
+cens_get_dec("H2", "county", state="WA", drop_total=TRUE)
 
-cens_get_acs("county subdivision", "B09001", state="WA", county="King")
+cens_get_acs("B09001", county="King", state="WA")
 }
 
 }

@@ -4,7 +4,7 @@
 \name{easycensus-package}
 \alias{easycensus}
 \alias{easycensus-package}
-\title{easycensus: Quickly Extract and Marginalize U.S. Census Tables}
+\title{easycensus: Quickly Find, Extract, and Marginalize U.S. Census Tables}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 

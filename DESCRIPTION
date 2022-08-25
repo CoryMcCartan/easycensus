@@ -1,5 +1,5 @@
 Package: easycensus
-Title: Quickly Extract and Marginalize U.S. Census Tables
+Title: Quickly Find, Extract, and Marginalize U.S. Census Tables
 Version: 1.0.0
 Authors@R: 
     person("Cory", "McCartan", email="cmccartan@g.harvard.edu", role=c("aut", "cre"))
@@ -16,7 +16,6 @@ Imports:
     dplyr (>= 1.0.0),
     tidyr (>= 1.0.0),
     stringr,
-    tidycensus,
     censusapi,
     cli
 Suggests:

@@ -19,7 +19,9 @@ set.seed(5118)
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/easycensus)](https://CRAN.R-project.org/package=easycensus)
-[![R-CMD-check](https://github.com/CoryMcCartan/easycensus/workflows/R-CMD-check/badge.svg)](https://github.com/CoryMcCartan/easycensus/actions) [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![R-CMD-check](https://github.com/CoryMcCartan/easycensus/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/CoryMcCartan/easycensus/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 Extracting desired data using the proper Census variable names can be time-consuming.
@@ -41,12 +43,12 @@ library(easycensus)
 cens_find_dec(age, race)
 ```
 
-We can see right away that our best bet is either table `P012` or table `PCT012`, depending on whether we want age in 5-year groups or down to individual years.
+We can see right away that our best bet is either table `P12` or table `PCT12`, depending on whether we want age in 5-year groups or down to individual years.
 Let's say you're OK with the five-year bins.
 Then all you need to do to get your data is to call `cens_get_dec()`.
 
 ```{r cache=TRUE}
-d_cens = cens_get_dec("tract", "P012", state="AK", county="Nome")
+d_cens = cens_get_dec("P12", "tract", state="AK", county="Nome")
 print(d_cens)
 ```
 

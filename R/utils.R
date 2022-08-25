@@ -57,7 +57,6 @@ cens_margin_to = function(data, ...) {
     if (is_sf <- inherits(data, "sf")) {
         rlang::check_installed("sf")
         geom_d = dplyr::distinct(dplyr::select(data, .data$GEOID))
-        rlang::check_installed("sf")
         # requireNamespace("sf", quietly=TRUE)
         data = sf::st_drop_geometry(data)
     }

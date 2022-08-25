@@ -19,7 +19,7 @@ possible matches, at the cost of more output. Negative values will be
 converted to positive but will suppress any printing.}
 }
 \value{
-The codes for the top \code{show} tables, invisibly.
+The codes for the top \code{show} tables, invisibly if \code{show} is positive.
 }
 \description{
 This function uses fuzzy matching to help identify tables from the census

@@ -12,7 +12,7 @@
 #'   possible matches, at the cost of more output. Negative values will be
 #'   converted to positive but will suppress any printing.
 #'
-#' @returns The codes for the top `show` tables, invisibly.
+#' @returns The codes for the top `show` tables, invisibly if `show` is positive.
 #'
 #' @examples
 #' cens_find_dec("sex", "age")
@@ -32,8 +32,10 @@ cens_find_dec <- function(..., show=2) {
     if (show > 0) {
         cli_h1("Top {show} matching table{?s}")
         lapply(tables_sf1[best], print, all=FALSE)
+        invisible(best)
+    } else {
+        best
     }
-    invisible(best)
 }
 
 #' @rdname cens_find
@@ -44,8 +46,10 @@ cens_find_acs <- function(..., show=4) {
     if (show > 0) {
         cli_h1("Top {show} matching table{?s}")
         lapply(tables_acs[best], print, all=FALSE)
+        invisible(best)
+    } else {
+        best
     }
-    invisible(best)
 }
 
 

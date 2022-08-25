@@ -5,7 +5,7 @@
 # roxygen namespace tags. Modify with care!
 #' @import stringr
 #' @import cli
-#' @importFrom dplyr as_tibble if_else
+#' @importFrom dplyr as_tibble if_else %>%
 #' @importFrom rlang .data .env
 #' @importFrom utils data adist
 #' @importFrom stats qnorm rnorm

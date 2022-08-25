@@ -8,9 +8,10 @@ new_cens_table = function(x) {
 }
 
 match_survey = function(x) {
-    dplyr::case_when(x == "acs1" ~ "1-year ACS",
-                     x == "acs5" ~ "5-year ACS",
-                     x == "sf1" ~ "Summary File 1",
+    dplyr::case_when(x == "acs/acs1" ~ "ACS / 1-year Detailed",
+                     x == "acs/acs5" ~ "ACS / 5-year Detailed",
+                     x == "dec/sf1" ~ "Decennial / Summary File 1",
+                     x == "dec/pl" ~ "Decennial / P.L. 94-171",
                      TRUE ~ x)
 }
 
