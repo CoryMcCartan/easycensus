@@ -25,13 +25,11 @@ reference:
   desc: "A data type that keeps track of margins of error"
 - contents:
   - estimate
-  - est_special
-  - est_extract
+  - est_prop
+  - get_est
   - format.estimate
 - title: "Miscellaneous"
   desc: "Other package functions"
 - contents:
   - cens_geo
   - cens_auth
-  - est_extract
-  - format.estimate
