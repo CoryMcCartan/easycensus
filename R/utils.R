@@ -54,13 +54,6 @@ cens_auth_env = function() {
 #' }
 #' @export
 cens_margin_to = function(data, ...) {
-    if (is_sf <- inherits(data, "sf")) {
-        rlang::check_installed("sf")
-        geom_d = dplyr::distinct(dplyr::select(data, .data$GEOID))
-        # requireNamespace("sf", quietly=TRUE)
-        data = sf::st_drop_geometry(data)
-    }
-
     data = dplyr::summarize(
         dplyr::group_by(data, .data$GEOID, .data$NAME, ...),
         value = sum(.data$value),
