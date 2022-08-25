@@ -9,7 +9,7 @@
     be time-consuming. This package takes the pain out of that process by 
     providing functions to quickly locate variables and download labeled tables 
     from the Census APIs (&lt;https://www.census.gov/data/developers/data-sets.html&gt;).">
-<title>Quickly Extract and Marginalize U.S. Census Tables • easycensus</title>
+<title>Quickly Find, Extract, and Marginalize U.S. Census Tables • easycensus</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -20,7 +20,7 @@
 <link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Quickly Extract and Marginalize U.S. Census Tables">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Quickly Find, Extract, and Marginalize U.S. Census Tables">
 <meta property="og:description" content="Extracting desired data using the proper Census variable names can 
     be time-consuming. This package takes the pain out of that process by 
     providing functions to quickly locate variables and download labeled tables 
@@ -91,7 +91,9 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── Top 2 matching tables ───────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  P012  - SEX BY AGE</span></span>
+<span><span class="co">#&gt;  P12  - SEX BY AGE</span></span>
+<span><span class="co">#&gt; Surveys / Files:</span></span>
+<span><span class="co">#&gt; ✔ Decennial / Summary File 1</span></span>
 <span><span class="co">#&gt; Parsed variables:</span></span>
 <span><span class="co">#&gt; • sex</span></span>
 <span><span class="co">#&gt; • age</span></span>
@@ -101,7 +103,9 @@
 <span><span class="co">#&gt; • female / 20 years / two or more races</span></span>
 <span><span class="co">#&gt; • male / 55 to 59 years / american indian and alaska native alone</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  PCT012  - SEX BY AGE</span></span>
+<span><span class="co">#&gt;  PCT12  - SEX BY AGE</span></span>
+<span><span class="co">#&gt; Surveys / Files:</span></span>
+<span><span class="co">#&gt; ✔ Decennial / Summary File 1</span></span>
 <span><span class="co">#&gt; Parsed variables:</span></span>
 <span><span class="co">#&gt; • sex</span></span>
 <span><span class="co">#&gt; • age</span></span>
@@ -110,27 +114,26 @@
 <span><span class="co">#&gt; • female / 70 years / total</span></span>
 <span><span class="co">#&gt; • female / 85 years / native hawaiian and other pacific islander alone</span></span>
 <span><span class="co">#&gt; • female / 30 years / two or more races</span></span></code></pre></div>
-<p>We can see right away that our best bet is either table <code>P012</code> or table <code>PCT012</code>, depending on whether we want age in 5-year groups or down to individual years. Let’s say you’re OK with the five-year bins. Then all you need to do to get your data is to call <code><a href="reference/cens_get.html">cens_get_dec()</a></code>.</p>
+<p>We can see right away that our best bet is either table <code>P12</code> or table <code>PCT12</code>, depending on whether we want age in 5-year groups or down to individual years. Let’s say you’re OK with the five-year bins. Then all you need to do to get your data is to call <code><a href="reference/cens_get.html">cens_get_dec()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">d_cens</span> <span class="op">=</span> <span class="fu"><a href="reference/cens_get.html">cens_get_dec</a></span><span class="op">(</span><span class="st">"tract"</span>, <span class="st">"P012"</span>, state<span class="op">=</span><span class="st">"AK"</span>, county<span class="op">=</span><span class="st">"Nome"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">d_cens</span> <span class="op">=</span> <span class="fu"><a href="reference/cens_get.html">cens_get_dec</a></span><span class="op">(</span><span class="st">"P12"</span>, <span class="st">"tract"</span>, state<span class="op">=</span><span class="st">"AK"</span>, county<span class="op">=</span><span class="st">"Nome"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">d_cens</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 9,600 × 7</span></span>
+<span><span class="co">#&gt; # A tibble: 960 × 7</span></span>
 <span><span class="co">#&gt;    GEOID       NAME                            varia…¹ value sex   age   race_…²</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;                           &lt;chr&gt;   &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  </span></span>
 <span><span class="co">#&gt;  1 02180000100 Census Tract 1, Nome Census Ar… P012002  3053 male  total total  </span></span>
-<span><span class="co">#&gt;  2 02180000200 Census Tract 2, Nome Census Ar… P012002  2005 male  total total  </span></span>
-<span><span class="co">#&gt;  3 02180000100 Census Tract 1, Nome Census Ar… P012003   359 male  unde… total  </span></span>
-<span><span class="co">#&gt;  4 02180000200 Census Tract 2, Nome Census Ar… P012003   175 male  unde… total  </span></span>
-<span><span class="co">#&gt;  5 02180000100 Census Tract 1, Nome Census Ar… P012004   318 male  5 to… total  </span></span>
-<span><span class="co">#&gt;  6 02180000200 Census Tract 2, Nome Census Ar… P012004   132 male  5 to… total  </span></span>
-<span><span class="co">#&gt;  7 02180000100 Census Tract 1, Nome Census Ar… P012005   294 male  10 t… total  </span></span>
-<span><span class="co">#&gt;  8 02180000200 Census Tract 2, Nome Census Ar… P012005   161 male  10 t… total  </span></span>
-<span><span class="co">#&gt;  9 02180000100 Census Tract 1, Nome Census Ar… P012006   165 male  15 t… total  </span></span>
-<span><span class="co">#&gt; 10 02180000200 Census Tract 2, Nome Census Ar… P012006    90 male  15 t… total  </span></span>
-<span><span class="co">#&gt; # … with 9,590 more rows, and abbreviated variable names ¹​variable,</span></span>
+<span><span class="co">#&gt;  2 02180000100 Census Tract 1, Nome Census Ar… P012003   359 male  unde… total  </span></span>
+<span><span class="co">#&gt;  3 02180000100 Census Tract 1, Nome Census Ar… P012004   318 male  5 to… total  </span></span>
+<span><span class="co">#&gt;  4 02180000100 Census Tract 1, Nome Census Ar… P012005   294 male  10 t… total  </span></span>
+<span><span class="co">#&gt;  5 02180000100 Census Tract 1, Nome Census Ar… P012006   165 male  15 t… total  </span></span>
+<span><span class="co">#&gt;  6 02180000100 Census Tract 1, Nome Census Ar… P012007   130 male  18 a… total  </span></span>
+<span><span class="co">#&gt;  7 02180000100 Census Tract 1, Nome Census Ar… P012008    53 male  20 y… total  </span></span>
+<span><span class="co">#&gt;  8 02180000100 Census Tract 1, Nome Census Ar… P012009    47 male  21 y… total  </span></span>
+<span><span class="co">#&gt;  9 02180000100 Census Tract 1, Nome Census Ar… P012010   150 male  22 t… total  </span></span>
+<span><span class="co">#&gt; 10 02180000100 Census Tract 1, Nome Census Ar… P012011   204 male  25 t… total  </span></span>
+<span><span class="co">#&gt; # … with 950 more rows, and abbreviated variable names ¹​variable,</span></span>
 <span><span class="co">#&gt; #   ²​race_ethnicity</span></span>
 <span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
-<p><code>easycensus</code> is built on top of the great <a href="https://walker-data.com/tidycensus/" class="external-link"><code>tidycensus</code></a> package, so all of the usual arguments to those functions (including the ability to get shapefile information) work here, too.</p>
 <p>Once you’ve gotten your labeled data, it’s easy to marginalize out the unneeded <code>sex</code> variable. You can either use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code> as usual, or you can use the <code><a href="reference/cens_margin_to.html">cens_margin_to()</a></code> function in <code>easycensus</code>. This has the added advantage of automatically handling margins of error for ACS data.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -143,16 +146,16 @@
 <span><span class="co">#&gt; # A tibble: 414 × 5</span></span>
 <span><span class="co">#&gt;    GEOID       NAME                                     age          race  value</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;                                    &lt;fct&gt;        &lt;fct&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… amer…  5240</span></span>
-<span><span class="co">#&gt;  2 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… asia…    10</span></span>
-<span><span class="co">#&gt;  3 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… blac…    10</span></span>
-<span><span class="co">#&gt;  4 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… hisp…    30</span></span>
+<span><span class="co">#&gt;  1 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… amer…   524</span></span>
+<span><span class="co">#&gt;  2 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… asia…     1</span></span>
+<span><span class="co">#&gt;  3 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… blac…     1</span></span>
+<span><span class="co">#&gt;  4 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… hisp…     3</span></span>
 <span><span class="co">#&gt;  5 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… nati…     0</span></span>
 <span><span class="co">#&gt;  6 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… some…     0</span></span>
-<span><span class="co">#&gt;  7 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… two …   230</span></span>
-<span><span class="co">#&gt;  8 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… whit…   110</span></span>
-<span><span class="co">#&gt;  9 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… whit…   100</span></span>
-<span><span class="co">#&gt; 10 02180000100 Census Tract 1, Nome Census Area, Alaska 15 to 17 ye… amer…  2930</span></span>
+<span><span class="co">#&gt;  7 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… two …    23</span></span>
+<span><span class="co">#&gt;  8 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… whit…    11</span></span>
+<span><span class="co">#&gt;  9 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… whit…    10</span></span>
+<span><span class="co">#&gt; 10 02180000100 Census Tract 1, Nome Census Area, Alaska 15 to 17 ye… amer…   293</span></span>
 <span><span class="co">#&gt; # … with 404 more rows</span></span>
 <span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
 <p>Finally, you might want to simplify the age and race labels, since they are kind of verbose. <code>easycensus</code> provides a set of <code>tidy_*()</code> functions to assist with this.</p>
@@ -163,16 +166,16 @@
 <span><span class="co">#&gt; # A tibble: 414 × 7</span></span>
 <span><span class="co">#&gt;    GEOID       NAME                             age   race  value age_f…¹ age_to</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;                            &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 02180000100 Census Tract 1, Nome Census Are… 10 t… aian   5240      10     14</span></span>
-<span><span class="co">#&gt;  2 02180000100 Census Tract 1, Nome Census Are… 10 t… asian    10      10     14</span></span>
-<span><span class="co">#&gt;  3 02180000100 Census Tract 1, Nome Census Are… 10 t… black    10      10     14</span></span>
-<span><span class="co">#&gt;  4 02180000100 Census Tract 1, Nome Census Are… 10 t… hisp     30      10     14</span></span>
+<span><span class="co">#&gt;  1 02180000100 Census Tract 1, Nome Census Are… 10 t… aian    524      10     14</span></span>
+<span><span class="co">#&gt;  2 02180000100 Census Tract 1, Nome Census Are… 10 t… asian     1      10     14</span></span>
+<span><span class="co">#&gt;  3 02180000100 Census Tract 1, Nome Census Are… 10 t… black     1      10     14</span></span>
+<span><span class="co">#&gt;  4 02180000100 Census Tract 1, Nome Census Are… 10 t… hisp      3      10     14</span></span>
 <span><span class="co">#&gt;  5 02180000100 Census Tract 1, Nome Census Are… 10 t… nhpi      0      10     14</span></span>
 <span><span class="co">#&gt;  6 02180000100 Census Tract 1, Nome Census Are… 10 t… other     0      10     14</span></span>
-<span><span class="co">#&gt;  7 02180000100 Census Tract 1, Nome Census Are… 10 t… two     230      10     14</span></span>
-<span><span class="co">#&gt;  8 02180000100 Census Tract 1, Nome Census Are… 10 t… white   110      10     14</span></span>
-<span><span class="co">#&gt;  9 02180000100 Census Tract 1, Nome Census Are… 10 t… whit…   100      10     14</span></span>
-<span><span class="co">#&gt; 10 02180000100 Census Tract 1, Nome Census Are… 15 t… aian   2930      15     17</span></span>
+<span><span class="co">#&gt;  7 02180000100 Census Tract 1, Nome Census Are… 10 t… two      23      10     14</span></span>
+<span><span class="co">#&gt;  8 02180000100 Census Tract 1, Nome Census Are… 10 t… white    11      10     14</span></span>
+<span><span class="co">#&gt;  9 02180000100 Census Tract 1, Nome Census Are… 10 t… whit…    10      10     14</span></span>
+<span><span class="co">#&gt; 10 02180000100 Census Tract 1, Nome Census Are… 15 t… aian    293      15     17</span></span>
 <span><span class="co">#&gt; # … with 404 more rows, and abbreviated variable name ¹​age_from</span></span>
 <span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
 <p>Dive into the <a href="https://corymccartan.com/easycensus/reference/">reference</a> to learn more!</p>
@@ -225,9 +228,9 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://CRAN.R-project.org/package=easycensus" class="external-link"><img src="https://www.r-pkg.org/badges/version/easycensus" alt="CRAN status"></a></li>
-<li><a href="https://github.com/CoryMcCartan/easycensus/actions" class="external-link"><img src="https://github.com/CoryMcCartan/easycensus/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://opensource.org/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></li>
+<li><a href="https://github.com/CoryMcCartan/easycensus/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/CoryMcCartan/easycensus/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 </ul>
 </div>
 
