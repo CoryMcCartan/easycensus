@@ -19,9 +19,8 @@ Imports:
     censusapi,
     cli
 Suggests:
-    testthat (>= 3.0.0),
     posterior,
-    sf
+    testthat (>= 3.0.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

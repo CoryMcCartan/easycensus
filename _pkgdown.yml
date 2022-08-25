@@ -13,7 +13,7 @@ reference:
   desc: "Functions to parse and locate tables with variables of interest"
 - contents:
   - cens_find
-  - cens_parse_table
+  - cens_parse_tables
   - tables
 - title: "Get Data"
   desc: "Functions to download and clean up data for a specific table and geography"
