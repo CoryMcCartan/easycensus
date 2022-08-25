@@ -45,6 +45,7 @@ which geographic specifiers may be provided in combination with others.
 \details{
 Supported geography arguments:
 \itemize{
+\item \code{us}
 \item \code{region}
 \item \code{division}
 \item \code{state}

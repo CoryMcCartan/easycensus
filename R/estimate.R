@@ -27,7 +27,9 @@ NULL
 #' @returns An `estimate` vector.
 #'
 #' @examples
-#' estimate(5, 2) # 5 plus-or-minus 2
+#' estimate(5, 2) # 5 with std. error  2
+#' estimate(15, moe=3) - estimate(5, moe=4)
+#' estimate(1:4, 0.1) * estimate(1, 0.1)
 #'
 #' @export
 estimate = function(x, se=NULL, moe=NULL, conf=0.9) {

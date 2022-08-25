@@ -40,7 +40,6 @@ geos = dplyr::bind_rows(dec=geo_dec, acs5=geo_acs5, acs1=geo_acs1, .id="survey")
 
 geo = as.list(geos)
 names(geo) = short
-geo$us = NULL
 
 
 counties = tinytiger::county_fips_2020

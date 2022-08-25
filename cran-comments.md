@@ -1,11 +1,15 @@
 ## Test environments
-* local R installation (macOS), R 4.1.2
-* ubuntu-latest (on GitHub Actions), (release)
-* windows-latest (on winbuilder), (devel)
+* local R installation (macOS), R 4.2.0
+* windows-latest (on gh-actions), (release)
+* macos-latest (on gh-actions), (release)
+* ubuntu-latest (on gh-actions), (release)
+* ubuntu-latest (on gh-actions), (devel)
+* ubuntu-latest (on gh-actions), (old-release)
 
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
 
-* Examples are \dontrun in `cens_get_*()`, `cens_parse_tables()`, and `cens_margin_to()` 
-since these require an API key and may take more than a few seconds to download.
+* Examples are \dontrun in `cens_get_*()`, `cens_parse_tables()`,
+`cens_margin_to()`, and one example in `tidiers` since these require an API key
+and may take more than a few seconds to download.

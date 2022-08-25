@@ -8,4 +8,30 @@ navbar:
 authors:
   Cory McCartan:
     href: https://corymccartan.com/
-
+reference:
+- title: "Find Tables"
+  desc: "Functions to parse and locate tables with variables of interest"
+- contents:
+  - cens_find
+  - cens_parse_table
+  - tables
+- title: "Get Data"
+  desc: "Functions to download and clean up data for a specific table and geography"
+- contents:
+  - cens_get
+  - cens_margin_to
+  - tidiers
+- title: "Work with Noisy Estimates"
+  desc: "A data type that keeps track of margins of error"
+- contents:
+  - estimate
+  - est_special
+  - est_extract
+  - format.estimate
+- title: "Miscellaneous"
+  desc: "Other package functions"
+- contents:
+  - cens_geo
+  - cens_auth
+  - est_extract
+  - format.estimate

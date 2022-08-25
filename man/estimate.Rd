@@ -36,6 +36,8 @@ errors in each value are uncorrelated. If in fact there is correlation, the
 margins of error could be wildly under- or over-estimated.
 }
 \examples{
-estimate(5, 2) # 5 plus-or-minus 2
+estimate(5, 2) # 5 with std. error  2
+estimate(15, moe=3) - estimate(5, moe=4)
+estimate(1:4, 0.1) * estimate(1, 0.1)
 
 }

@@ -57,7 +57,7 @@ cens_get_dec <- function(table, geo=NULL, ..., check_geo=FALSE, drop_total=FALSE
         spec = tables_sf1[[table]]
     } else if (inherits(table, "cens_table")) {
         if (!table$tables[1] %in% names(tables_sf1))
-            cli_abort("Table {.field {table}} not found for the decennial census.")
+            cli_abort("Table {.field {table$tables[1]}} not found for the decennial census.")
         spec = table
         table = spec$tables[1]
     } else {
@@ -101,15 +101,16 @@ cens_get_acs <- function(table, geo=NULL, ..., year=2019, survey=c("acs5", "acs1
         spec = tables_acs[[table]]
     } else if (inherits(table, "cens_table")) {
         if (!table$tables[1] %in% names(tables_acs))
-            cli_abort("Table {.field {table}} not found for the ACS.")
+            cli_abort("Table {.field {table$tables[1]}} not found for the ACS.")
         spec = table
+        table = spec$tables[1]
     } else {
         cli_abort("{.arg table} must be a character vector or {.cls cens_table}.")
     }
 
     api = str_c("acs/", match.arg(survey))
     if (!api %in% spec$surveys) {
-        cli_abort("{.arg table} is not available for {.field {match_survey('acs/acs1')}}")
+        cli_abort("{.arg {table}} is not available for {.field {match_survey(api)}}")
     }
 
     geo_spec = cens_geo(geo, ..., check=check_geo, api=api, year=year)

@@ -14,6 +14,7 @@ Extracting desired data using the proper Census variable names can be time-consu
 Useful links:
 \itemize{
   \item \url{https://corymccartan.com/easycensus/}
+  \item \url{https://github.com/CoryMcCartan/easycensus/}
   \item Report bugs at \url{https://github.com/CoryMcCartan/easycensus/issues}
 }
 
