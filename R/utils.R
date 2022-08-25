@@ -54,14 +54,8 @@ cens_auth_env = function() {
 #' }
 #' @export
 cens_margin_to = function(data, ...) {
-    data = dplyr::summarize(
+    dplyr::summarize(
         dplyr::group_by(data, .data$GEOID, .data$NAME, ...),
         value = sum(.data$value),
         .groups = "drop")
-
-    if (is_sf) {
-        data = sf::st_as_sf(dplyr::left_join(data, geom_d, by="GEOID"))
-    }
-
-    data
 }
