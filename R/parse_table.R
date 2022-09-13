@@ -43,6 +43,7 @@ NULL
 #' cens_parse_tables("dec/pl", 2020)
 #' }
 #'
+#' @export
 cens_parse_tables = function(api, year) {
     vars = get_survey_vars(api, year)
 

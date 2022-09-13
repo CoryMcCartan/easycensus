@@ -10,6 +10,8 @@ cens_get_dec(
   table,
   geo = NULL,
   ...,
+  sumfile = "sf1",
+  pop_group = NULL,
   check_geo = FALSE,
   drop_total = FALSE,
   show_call = FALSE
@@ -45,6 +47,13 @@ matters here---the first argument will be the geographic level to return
 (i.e., it corresponds to the \code{geo} argument) and additional arguments will
 filter the results. Use \code{"all"}, \code{"*"}, \code{NA}, or \code{TRUE} to return all units
 of a particular geography.  See the examples of \code{\link[=cens_geo]{cens_geo()}} for details.}
+
+\item{sumfile}{For decennial data, the summary file to use. SF2 contains more
+detailed race and household info.}
+
+\item{pop_group}{For decennial data using summary file SF2, the population
+group to filter to. See
+\url{https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf2.pdf#page=347}.}
 
 \item{check_geo}{If \code{TRUE}, validate the provided geographies against the
 available geographies from the relevant Census API.}

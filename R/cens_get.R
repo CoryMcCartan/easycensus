@@ -24,6 +24,11 @@
 #' @param survey For ACS data, whether to use the one-year or
 #'   five-year survey (the default). Make sure to check availability using
 #'   [cens_find_acs()].
+#' @param sumfile For decennial data, the summary file to use. SF2 contains more
+#'   detailed race and household info.
+#' @param pop_group For decennial data using summary file SF2, the population
+#'   group to filter to. See
+#'   <https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf2.pdf#page=347>.
 #' @param check_geo If `TRUE`, validate the provided geographies against the
 #'   available geographies from the relevant Census API.
 #' @param drop_total Whether to filter out variables which are totals across
@@ -50,7 +55,8 @@ NULL
 
 #' @rdname cens_get
 #' @export
-cens_get_dec <- function(table, geo=NULL, ..., check_geo=FALSE, drop_total=FALSE, show_call=FALSE) {
+cens_get_dec <- function(table, geo=NULL, ..., sumfile="sf1", pop_group=NULL,
+                         check_geo=FALSE, drop_total=FALSE, show_call=FALSE) {
     if (is.character(table) && length(table) == 1L) {
         if (!table %in% names(tables_sf1))
             cli_abort("Table {.field {table}} not found.")
@@ -64,13 +70,14 @@ cens_get_dec <- function(table, geo=NULL, ..., check_geo=FALSE, drop_total=FALSE
         cli_abort("{.arg table} must be a character vector or {.cls cens_table}.")
     }
 
-    geo_spec = cens_geo(geo, ..., check=check_geo, api="dec/sf1", year=2010)
+    api = str_c("dec/", sumfile)
+    geo_spec = cens_geo(geo, ..., check=check_geo, api=api, year=2010)
 
     caller = rlang::current_call()
     suppressMessages({
     withCallingHandlers({
         d = do.call(dplyr::bind_rows, lapply(spec$tables, function(tbl_code) {
-            load_dec("dec/sf1", 2010, tbl_code, geo_spec, show_call=show_call)
+            load_dec(api, 2010, tbl_code, geo_spec, pop_group=pop_group, show_call=show_call)
         }))
     },
     warning = function(w) {
@@ -141,9 +148,8 @@ cens_get_acs <- function(table, geo=NULL, ..., year=2019, survey=c("acs5", "acs1
 }
 
 
-
 # Internal: get Census data and tidy-format
-load_dec <- function(api, year, tbl, geo_spec, show_call=FALSE) {
+load_dec <- function(api, year, tbl, geo_spec, pop_group=NULL, show_call=FALSE) {
     d = censusapi::getCensus(api, year, key=cens_auth(),
                              vars=str_glue("group({tbl})"),
                              region=geo_spec$region, regionin=geo_spec$regionin,
@@ -153,9 +159,24 @@ load_dec <- function(api, year, tbl, geo_spec, show_call=FALSE) {
     d = d[, str_starts(colnames(d), "[a-z]", negate=TRUE)]
     d$GEO_ID = str_sub(d$GEO_ID, 10)
 
+    pivot_ids = c("GEOID", "NAME")
+    if (api == "dec/sf2") {
+        if (is.null(pop_group)) {
+            pivot_ids = c("GEOID", "NAME", "race_ethnicity")
+            d = dplyr::select(d, -.data$POPGROUP) %>%
+                dplyr::rename(race_ethnicity = .data$POPGROUP_TTL)
+        } else {
+            if (!is.character(pop_group) || length(pop_group) != 1) {
+                cli_abort("{.arg pop_group} must be a length-1 character vector, or NULL")
+            }
+            d = dplyr::filter(d, .data$POPGROUP == pop_group) %>%
+                dplyr::select(-.data$POPGROUP, -.data$POPGROUP_TTL)
+        }
+    }
+
     dplyr::select(d, GEOID=.data$GEO_ID, .data$NAME,
                   dplyr::everything(), -dplyr::ends_with("ERR")) %>%
-        tidyr::pivot_longer(-c("GEOID", "NAME"),
+        tidyr::pivot_longer(-dplyr::all_of(pivot_ids),
                             names_to="variable", values_to="value")
 }
 
