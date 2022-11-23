@@ -143,7 +143,7 @@ match_geo <- function(g) {
     match = dplyr::coalesce(pmatch(g, names(geo)),
                             pmatch(g, geo_levels))
     if (is.na(match)) {
-        cli_abort("Geography level {.val {g}} not found.", .envir=parent.frame())
+        cli_abort("Geography level {.val {g}} not found.", call=parent.frame())
     } else {
         geo_levels[match]
     }
