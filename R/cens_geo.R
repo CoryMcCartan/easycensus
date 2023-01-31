@@ -90,9 +90,9 @@ cens_geo <- function(geo=NULL, ..., check=TRUE, api="acs/acs5", year=2019) {
         if (length(idx_for) == 0) cli_abort("Geography level {.val {geo_for}} not found.")
         matched = 0L
 
-        req_test = paste0(names(geo_in), collapse="|")
+        req_test = paste0(sort(names(geo_in)), collapse="|")
         # look for perfect 'requires' match
-        req = vapply(d_geo$requires, paste0, character(1), collapse="|")
+        req = vapply(d_geo$requires, function(x) paste0(sort(x), collapse="|"), character(1))
         idx_in = which(req_test == req)
         idx_both = intersect(idx_for, idx_in)
         matched = length(idx_both)

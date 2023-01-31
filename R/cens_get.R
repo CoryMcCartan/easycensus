@@ -26,6 +26,7 @@
 #'   [cens_find_acs()].
 #' @param sumfile For decennial data, the summary file to use. SF2 contains more
 #'   detailed race and household info.
+#' @param api A Census API programmatic name such as `"acs/acs5"`.
 #' @param pop_group For decennial data using summary file SF2, the population
 #'   group to filter to. See
 #'   <https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf2.pdf#page=347>.
@@ -53,7 +54,59 @@
 #' @name cens_get
 NULL
 
-#' @rdname cens_get
+
+#' @describeIn cens_get Get raw data from another Census Bureau API. Output will
+#'   be minimally tidied but will likely require further manipulation.
+#' @order 3
+#' @export
+cens_get_raw <- function(table, geo=NULL, ..., year=2010, api=NULL,
+                         check_geo=FALSE, show_call=TRUE) {
+    if (inherits(table, "cens_table")) {
+        if (!is.null(api) && !api %in% table$surveys)
+            cli_abort("Table {.field {table$tables[1]}} not found for the provided api {.val {api}}.")
+        spec = table
+        table = spec$tables[1]
+    } else {
+        cli_abort("For {.fn cens_get_raw}, {.arg table} must be a
+                  {.cls cens_table} object.")
+    }
+
+    if (is.null(api)) {
+        if (length(spec$surveys) > 1) {
+            cli_abort(c("Table {.field {table}} exists for multiple Census products.",
+                        ">"="Please specify the correct one with {.arg api}"))
+        } else {
+            api = spec$surveys[1]
+        }
+    }
+
+    geo_spec = cens_geo(geo, ..., check=check_geo, api=api, year=year)
+
+    caller = rlang::current_call()
+    suppressMessages({
+        withCallingHandlers({
+            d = do.call(dplyr::bind_rows, lapply(spec$tables, function(tbl_code) {
+                load_raw(api, year, tbl_code, geo_spec, show_call=show_call)
+            }))
+        },
+        warning = function(w) {
+            if (w$message != "NAs introduced by coercion") {
+                rlang::warn(w$message)
+            } else {
+                invokeRestart("muffleWarning")
+            }
+        },
+        error = function(e) {
+            rlang::abort(e$message, call=caller)
+        })
+    })
+
+    tbl_vars = spec$vars
+    dplyr::inner_join(d, tbl_vars, by="variable")
+}
+
+#' @describeIn cens_get Get decennial census data.
+#' @order 1
 #' @export
 cens_get_dec <- function(table, geo=NULL, ..., sumfile="sf1", pop_group=NULL,
                          check_geo=FALSE, drop_total=FALSE, show_call=FALSE) {
@@ -98,7 +151,8 @@ cens_get_dec <- function(table, geo=NULL, ..., sumfile="sf1", pop_group=NULL,
     dplyr::inner_join(d, tbl_vars, by="variable")
 }
 
-#' @rdname cens_get
+#' @describeIn cens_get Get American Community Survey (ACS) data.
+#' @order 2
 #' @export
 cens_get_acs <- function(table, geo=NULL, ..., year=2019, survey=c("acs5", "acs1"),
                          check_geo=FALSE, drop_total=FALSE, show_call=FALSE) {
@@ -149,6 +203,29 @@ cens_get_acs <- function(table, geo=NULL, ..., year=2019, survey=c("acs5", "acs1
 
 
 # Internal: get Census data and tidy-format
+load_raw <- function(api, year, tbl, geo_spec, show_call=TRUE) {
+    d = censusapi::getCensus(api, year, key=cens_auth(),
+                             vars=str_glue("group({tbl})"),
+                             region=geo_spec$region, regionin=geo_spec$regionin,
+                             show_call=show_call) %>%
+        as_tibble()
+
+    d = d[, str_starts(colnames(d), "[a-z]", negate=TRUE)]
+    d$GEO_ID = str_sub(d$GEO_ID, 10)
+
+    rgx_tbl = str_replace_all(tbl, "\\d", "\\\\d") # make a regex which matches table variables
+    pivot_ids = union( # the remaining other columns to use as ID cols in pivoting
+        c("GEO_ID", "NAME"),
+        colnames(d)[str_starts(colnames(d), rgx_tbl, negate=TRUE)]
+    )
+
+    dplyr::select(d, "GEO_ID", "NAME",
+                  dplyr::everything(), -dplyr::ends_with("ERR")) %>%
+        tidyr::pivot_longer(-dplyr::all_of(pivot_ids),
+                            names_to="variable", values_to="value") %>%
+        dplyr::rename(GEOID="GEO_ID", race_ethnicity=dplyr::any_of("POPGROUP_TTL"))
+}
+
 load_dec <- function(api, year, tbl, geo_spec, pop_group=NULL, show_call=FALSE) {
     d = censusapi::getCensus(api, year, key=cens_auth(),
                              vars=str_glue("group({tbl})"),
@@ -174,7 +251,7 @@ load_dec <- function(api, year, tbl, geo_spec, pop_group=NULL, show_call=FALSE) 
         }
     }
 
-    dplyr::select(d, GEOID=.data$GEO_ID, .data$NAME,
+    dplyr::select(d, GEOID="GEO_ID", "NAME",
                   dplyr::everything(), -dplyr::ends_with("ERR")) %>%
         tidyr::pivot_longer(-dplyr::all_of(pivot_ids),
                             names_to="variable", values_to="value")
@@ -191,7 +268,7 @@ load_acs <- function(api, year, tbl, geo_spec, show_call=FALSE) {
     d = d[, str_starts(colnames(d), "[a-z]", negate=TRUE)]
     d$GEO_ID = str_sub(d$GEO_ID, 10)
 
-    dplyr::select(d, GEOID=.data$GEO_ID, .data$NAME,
+    dplyr::select(d, GEOID="GEO_ID", "NAME",
                   dplyr::everything(), -dplyr::ends_with("ERR")) %>%
         tidyr::pivot_longer(-c("GEOID", "NAME"),
                             names_pattern="([A-Z][0-9_]+)([A-Z]+)",
@@ -210,5 +287,5 @@ load_acs <- function(api, year, tbl, geo_spec, show_call=FALSE) {
                                            is.na(.data$MA) ~ .data$M,
                                            TRUE ~ .data$M),
                       value = estimate(.data$E, .data$M)) %>%
-        dplyr::select(.data$GEOID, .data$NAME, .data$variable, .data$value)
+        dplyr::select("GEOID", "NAME", "variable", "value")
 }

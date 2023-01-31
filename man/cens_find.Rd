@@ -6,11 +6,16 @@
 \alias{cens_find_acs}
 \title{Find a decennial or ACS census table with variables of interest}
 \usage{
+cens_find(tables, ..., show = 4)
+
 cens_find_dec(..., show = 2)
 
 cens_find_acs(..., show = 4)
 }
 \arguments{
+\item{tables}{A list of \code{cens_table} objects, such as is produced by
+\code{\link[=cens_parse_tables]{cens_parse_tables()}}.}
+
 \item{...}{Variables to look for. These can be length-1 character vectors,
 or, for convenience, can be left unquoted (see examples).}
 
@@ -30,6 +35,7 @@ be useful in finding variables.
 }
 \examples{
 cens_find_dec("sex", "age")
+cens_find(tables_sf1, "sex", "age") # same as above
 cens_find_dec(tenure, race)
 cens_find_acs("income", "sex", show=3)
 cens_find_acs("heath care", show=-1)
