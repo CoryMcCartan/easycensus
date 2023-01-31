@@ -1,8 +1,9 @@
 geo_acs5 = censusapi::listCensusMetadata(name="acs/acs5", vintage=2019, type="geographies")
 geo_acs1 = censusapi::listCensusMetadata(name="acs/acs1", vintage=2019, type="geographies")
 geo_dec = censusapi::listCensusMetadata(name="dec/sf1", vintage=2010, type="geographies")
+geo_pl = censusapi::listCensusMetadata(name="dec/pl", vintage=2020, type="geographies")
 
-geos = dplyr::bind_rows(dec=geo_dec, acs5=geo_acs5, acs1=geo_acs1, .id="survey") |>
+geos = dplyr::bind_rows(dec=geo_dec, pl=geo_pl, acs5=geo_acs5, acs1=geo_acs1, .id="survey") |>
     as_tibble() |>
     dplyr::distinct(name) |>
     dplyr::pull()
@@ -36,6 +37,7 @@ geos = dplyr::bind_rows(dec=geo_dec, acs5=geo_acs5, acs1=geo_acs1, .id="survey")
     short[short == "state_legislative_district_upper_chamber"] = "sld_upper"
     short[short == "state_legislative_district_lower_chamber"] = "sld_lower"
     short[short == "congressional_district"] = "cd"
+    short[short == "voting_district"] = "vtd"
 }
 
 geo = as.list(geos)
