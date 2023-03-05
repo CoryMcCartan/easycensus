@@ -263,6 +263,7 @@ load_acs <- function(api, year, tbl, geo_spec, show_call=FALSE) {
                              vars=str_glue("group({tbl})"),
                              region=geo_spec$region, regionin=geo_spec$regionin,
                              show_call=show_call) %>%
+        mutate(across(where(~ all(is.na(.))), as.numeric)) %>%
         as_tibble()
 
     d = d[, str_starts(colnames(d), "[a-z]", negate=TRUE)]
@@ -271,7 +272,7 @@ load_acs <- function(api, year, tbl, geo_spec, show_call=FALSE) {
     dplyr::select(d, GEOID="GEO_ID", "NAME",
                   dplyr::everything(), -dplyr::ends_with("ERR")) %>%
         tidyr::pivot_longer(-c("GEOID", "NAME"),
-                            names_pattern="([A-Z][0-9_]+)([A-Z]+)",
+                            names_pattern="([A-Z][0-9]+[A-Z]?[0-9_]+)([A-Z]+)",
                             names_to=c("variable", ".value")) %>%
         dplyr::mutate(variable = str_c(.data$variable, "E"),
                       E = dplyr::case_when(.data$EA == "-" ~ NA_real_,
