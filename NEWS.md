@@ -3,6 +3,7 @@
 * New `cens_get_raw()` allows users to try to download from non-ACS and 
 non-2010-decennial APIs. Goes hand-in-hand with `cens_parse_tables()`.
 * Fixes CRAN issues and other bugs
+* Improves consistency of `cens_get_acs()`
 
 # easycensus 1.0.0
 
