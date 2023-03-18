@@ -8,10 +8,15 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note
 
-* This submission fixes earlier invalid HTML5 flagged on a CRAN check, and also
-updates package URLs.
+* This submission fixes a S3 generic/method consistency warning on R-devel 
+caused by an update to the `vctrs` package
+
+* The 1 NOTE is for CRAN checks on MacOS regarding non-ASCII characters in data.
+This submission does not remove the non-ASCII characters as they are Spanish-language
+and taken from the Census Bureau's data. It is important to maintain consistency
+between the data here and the Census Bureau labels, which include non-ASCII characters.
 
 * Examples are \dontrun in `cens_get_*()`, `cens_parse_tables()`,
 `cens_margin_to()`, and one example in `tidiers` since these require an API key

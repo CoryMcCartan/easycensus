@@ -403,7 +403,7 @@ fmt_moe = function(x, conf = 0.9, digits=2, trim=FALSE) {
 
 
 #' @export
-vec_ptype_abbr.estimate = function(x) "est"
+vec_ptype_abbr.estimate = function(x, ..., prefix_named = FALSE, suffix_shape = TRUE) "est"
 
 #' @importFrom pillar pillar_shaft
 #' @export

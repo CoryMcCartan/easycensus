@@ -136,7 +136,7 @@ tidy_age_bins = function(x, as_factor=FALSE) {
 
 #' @param as_factor if `TRUE`, return a factor with levels of the form `[35,40]`.
 #' @rdname tidiers
-# @export # TODO re-export for 0.3.0
+#' @export
 tidy_income_bins = function(x, as_factor=FALSE) {
     x = check_fc(x)
     xlev = str_squish(str_remove_all(levels(x), "[$,]"))
