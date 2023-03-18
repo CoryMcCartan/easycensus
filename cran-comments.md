@@ -1,6 +1,6 @@
 ## Test environments
 * local R installation (macOS), R 4.2.0
-* windows server (winbuilder)
+* windows server 2022 (r-hub)
 * windows-latest (on gh-actions), (release)
 * macos-latest (on gh-actions), (release)
 * ubuntu-latest (on gh-actions), (release)
@@ -11,10 +11,10 @@
 
 0 errors | 0 warnings | 1 note
 
-* This submission fixes a S3 generic/method consistency warning on R-devel 
-caused by an update to the `vctrs` package
+* This submission fixes a CRAN check warning on R-devel about 
+S3 generic/method consistency caused by an update to the `vctrs` package.
 
-* The 1 NOTE is for CRAN checks on MacOS regarding non-ASCII characters in data.
+* The 1 NOTE is for CRAN checks regarding non-ASCII characters in data.
 This submission does not remove the non-ASCII characters as they are Spanish-language
 and taken from the Census Bureau's data. It is important to maintain consistency
 between the data here and the Census Bureau labels, which include non-ASCII characters.
