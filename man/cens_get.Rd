@@ -87,7 +87,7 @@ five-year survey (the default). Make sure to check availability using
 \value{
 A tibble of census data in tidy format, with columns
 \code{GEOID}, \code{NAME}, \code{variable} (containing the Census variable code),
-\code{value} or \code{estiamte}, \code{moe} in the case of ACS tables,
+\code{value} or \code{estimate} in the case of ACS tables,
 and additional factor columns specific to the table.
 }
 \description{

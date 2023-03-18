@@ -1,5 +1,6 @@
 ## Test environments
 * local R installation (macOS), R 4.2.0
+* windows server (winbuilder)
 * windows-latest (on gh-actions), (release)
 * macos-latest (on gh-actions), (release)
 * ubuntu-latest (on gh-actions), (release)

@@ -40,7 +40,7 @@
 #'
 #' @returns A tibble of census data in tidy format, with columns
 #'   `GEOID`, `NAME`, `variable` (containing the Census variable code),
-#'   `value` or `estiamte`, `moe` in the case of ACS tables,
+#'   `value` or `estimate` in the case of ACS tables,
 #'   and additional factor columns specific to the table.
 #'
 #' @examples \dontrun{
@@ -263,7 +263,10 @@ load_acs <- function(api, year, tbl, geo_spec, show_call=FALSE) {
                              vars=str_glue("group({tbl})"),
                              region=geo_spec$region, regionin=geo_spec$regionin,
                              show_call=show_call) %>%
-        mutate(across(where(~ all(is.na(.))), as.numeric)) %>%
+        # dplyr::mutate(dplyr::across(dplyr::where(~ all(is.na(.))), as.numeric)) %>%
+        dplyr::mutate(dplyr::across(c(
+            dplyr::ends_with("_EA"), dplyr::ends_with("_MA")
+        ), as.character)) %>%
         as_tibble()
 
     d = d[, str_starts(colnames(d), "[a-z]", negate=TRUE)]
@@ -288,5 +291,5 @@ load_acs <- function(api, year, tbl, geo_spec, show_call=FALSE) {
                                            is.na(.data$MA) ~ .data$M,
                                            TRUE ~ .data$M),
                       value = estimate(.data$E, .data$M)) %>%
-        dplyr::select("GEOID", "NAME", "variable", "value")
+        dplyr::select("GEOID", "NAME", "variable", estimate="value")
 }
