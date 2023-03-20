@@ -15,6 +15,7 @@ Useful links:
 \itemize{
   \item \url{https://corymccartan.com/easycensus/}
   \item \url{https://github.com/CoryMcCartan/easycensus/}
+  \item \url{http://corymccartan.com/easycensus/}
   \item Report bugs at \url{https://github.com/CoryMcCartan/easycensus/issues}
 }
 

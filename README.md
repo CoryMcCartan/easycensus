@@ -8,7 +8,7 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/easycensus)](https://CRAN.R-project.org/package=easycensus)
 [![License:
-MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
 [![R-CMD-check](https://github.com/CoryMcCartan/easycensus/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/CoryMcCartan/easycensus/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
@@ -118,7 +118,6 @@ print(d_cens)
 #>  9 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… whit…    10
 #> 10 02180000100 Census Tract 1, Nome Census Area, Alaska 15 to 17 ye… amer…   293
 #> # … with 404 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
 ```
 
 Finally, you might want to simplify the age and race labels, since they
@@ -143,7 +142,6 @@ d_cens %>%
 #>  9 02180000100 Census Tract 1, Nome Census Are… 10 t… whit…    10      10     14
 #> 10 02180000100 Census Tract 1, Nome Census Are… 15 t… aian    293      15     17
 #> # … with 404 more rows, and abbreviated variable name ¹​age_from
-#> # ℹ Use `print(n = ...)` to see more rows
 ```
 
 Dive into the

@@ -19,7 +19,7 @@ set.seed(5118)
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/easycensus)](https://CRAN.R-project.org/package=easycensus)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
 [![R-CMD-check](https://github.com/CoryMcCartan/easycensus/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/CoryMcCartan/easycensus/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
