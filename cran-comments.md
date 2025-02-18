@@ -10,6 +10,8 @@
 
 0 errors | 0 warnings | 1 note
 
+* My email address has been updated; I don't have access to the old one to confirm.
+
 * The 1 NOTE is for CRAN checks regarding non-ASCII characters in data.
 This submission does not remove the non-ASCII characters as they are Spanish-language
 and taken from the Census Bureau's data. It is important to maintain consistency
