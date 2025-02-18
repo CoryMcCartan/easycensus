@@ -1,66 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://corymccartan.com/easycensus/404.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/authors.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/index.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/news/index.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/cens_auth.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/cens_find.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/cens_geo.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/cens_get.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/cens_margin_to.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/cens_parse_tables.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/easycensus-package.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/est_extract.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/est_special.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/estimate-vctrs.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/estimate.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/format.estimate.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/tables.html</loc>
-  </url>
-  <url>
-    <loc>http://corymccartan.com/easycensus/reference/tidiers.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>http://corymccartan.com/easycensus/404.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/LICENSE-text.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/LICENSE.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/authors.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/index.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/news/index.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/cens_auth.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/cens_find.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/cens_geo.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/cens_get.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/cens_margin_to.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/cens_parse_tables.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/easycensus-package.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/est_extract.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/est_special.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/estimate-vctrs.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/estimate.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/format.estimate.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/index.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/tables.html</loc></url>
+<url><loc>http://corymccartan.com/easycensus/reference/tidiers.html</loc></url>
 </urlset>
+
