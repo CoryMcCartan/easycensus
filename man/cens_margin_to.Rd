@@ -13,7 +13,8 @@ cens_margin_to(data, ...)
 will be marginalized out.}
 }
 \value{
-A new data frame that has had \code{\link[=group_by]{group_by()}} and \code{\link[=summarize]{summarize()}} applied.
+A new data frame that has had \code{\link[dplyr:group_by]{dplyr::group_by()}} and
+\code{\link[dplyr:summarise]{dplyr::summarize()}} applied.
 }
 \description{
 For ACS data, margins of error will be updated appropriately, using

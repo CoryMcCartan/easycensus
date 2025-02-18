@@ -46,7 +46,8 @@ cens_auth_env = function() {
 #' @param ... The variables of interest, which will be kept. Remaining variables
 #'   will be marginalized out.
 #'
-#' @return A new data frame that has had [group_by()] and [summarize()] applied.
+#' @return A new data frame that has had [dplyr::group_by()] and
+#'   [dplyr::summarize()] applied.
 #'
 #' @examples \dontrun{
 #' d_cens = cens_get_acs("state", "B25042")

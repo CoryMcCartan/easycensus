@@ -1,5 +1,5 @@
 ## Test environments
-* local R installation (macOS), R 4.2.0
+* local R installation (macOS), R 4.4.0
 * windows-latest (on gh-actions), (release)
 * macos-latest (on gh-actions), (release)
 * ubuntu-latest (on gh-actions), (release)
@@ -9,10 +9,6 @@
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
-
-* This resubmission fixes a redirected URL.  It also fixes CRAN check warning
-  on R-devel about S3 generic/method consistency caused by an update to the
-  `vctrs` package.
 
 * The 1 NOTE is for CRAN checks regarding non-ASCII characters in data.
 This submission does not remove the non-ASCII characters as they are Spanish-language

@@ -1,3 +1,8 @@
+# easycensus 1.1.2
+
+* Update documentation per CRAN NOTEs
+* Update maintainer information
+
 # easycensus 1.1.1
 
 * New `cens_get_raw()` allows users to try to download from non-ACS and 

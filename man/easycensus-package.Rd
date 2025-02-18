@@ -21,7 +21,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Cory McCartan \email{cmccartan@g.harvard.edu}
+\strong{Maintainer}: Cory McCartan \email{mccartan@psu.edu}
 
 }
 \keyword{internal}
