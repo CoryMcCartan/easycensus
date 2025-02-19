@@ -1,6 +1,6 @@
 Package: easycensus
 Title: Quickly Find, Extract, and Marginalize U.S. Census Tables
-Version: 1.1.2
+Version: 1.1.3
 Authors@R: 
     person("Cory", "McCartan", email="mccartan@psu.edu", role=c("aut", "cre"))
 Description: Extracting desired data using the proper Census variable names can 

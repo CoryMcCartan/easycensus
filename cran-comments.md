@@ -12,6 +12,8 @@
 
 * My email address has been updated; I don't have access to the old one to confirm.
 
+* This is a resubmission fixing a trailing URL slash in the README
+
 * The 1 NOTE is for CRAN checks regarding non-ASCII characters in data.
 This submission does not remove the non-ASCII characters as they are Spanish-language
 and taken from the Census Bureau's data. It is important to maintain consistency

@@ -8,7 +8,7 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/easycensus)](https://CRAN.R-project.org/package=easycensus)
 [![License:
-MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
 [![R-CMD-check](https://github.com/CoryMcCartan/easycensus/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/CoryMcCartan/easycensus/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
@@ -73,21 +73,19 @@ you need to do to get your data is to call `cens_get_dec()`.
 d_cens = cens_get_dec("P12", "tract", state="AK", county="Nome")
 print(d_cens)
 #> # A tibble: 960 × 7
-#>    GEOID       NAME                            varia…¹ value sex   age   race_…²
-#>    <chr>       <chr>                           <chr>   <dbl> <fct> <fct> <fct>  
-#>  1 02180000100 Census Tract 1, Nome Census Ar… P012002  3053 male  total total  
-#>  2 02180000100 Census Tract 1, Nome Census Ar… P012003   359 male  unde… total  
-#>  3 02180000100 Census Tract 1, Nome Census Ar… P012004   318 male  5 to… total  
-#>  4 02180000100 Census Tract 1, Nome Census Ar… P012005   294 male  10 t… total  
-#>  5 02180000100 Census Tract 1, Nome Census Ar… P012006   165 male  15 t… total  
-#>  6 02180000100 Census Tract 1, Nome Census Ar… P012007   130 male  18 a… total  
-#>  7 02180000100 Census Tract 1, Nome Census Ar… P012008    53 male  20 y… total  
-#>  8 02180000100 Census Tract 1, Nome Census Ar… P012009    47 male  21 y… total  
-#>  9 02180000100 Census Tract 1, Nome Census Ar… P012010   150 male  22 t… total  
-#> 10 02180000100 Census Tract 1, Nome Census Ar… P012011   204 male  25 t… total  
-#> # … with 950 more rows, and abbreviated variable names ¹​variable,
-#> #   ²​race_ethnicity
-#> # ℹ Use `print(n = ...)` to see more rows
+#>    GEOID       NAME                    variable value sex   age   race_ethnicity
+#>    <chr>       <chr>                   <chr>    <dbl> <fct> <fct> <fct>         
+#>  1 02180000100 Census Tract 1, Nome C… P012002   3053 male  total total         
+#>  2 02180000100 Census Tract 1, Nome C… P012003    359 male  unde… total         
+#>  3 02180000100 Census Tract 1, Nome C… P012004    318 male  5 to… total         
+#>  4 02180000100 Census Tract 1, Nome C… P012005    294 male  10 t… total         
+#>  5 02180000100 Census Tract 1, Nome C… P012006    165 male  15 t… total         
+#>  6 02180000100 Census Tract 1, Nome C… P012007    130 male  18 a… total         
+#>  7 02180000100 Census Tract 1, Nome C… P012008     53 male  20 y… total         
+#>  8 02180000100 Census Tract 1, Nome C… P012009     47 male  21 y… total         
+#>  9 02180000100 Census Tract 1, Nome C… P012010    150 male  22 t… total         
+#> 10 02180000100 Census Tract 1, Nome C… P012011    204 male  25 t… total         
+#> # ℹ 950 more rows
 ```
 
 Once you’ve gotten your labeled data, it’s easy to marginalize out the
@@ -117,7 +115,7 @@ print(d_cens)
 #>  8 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… whit…    11
 #>  9 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… whit…    10
 #> 10 02180000100 Census Tract 1, Nome Census Area, Alaska 15 to 17 ye… amer…   293
-#> # … with 404 more rows
+#> # ℹ 404 more rows
 ```
 
 Finally, you might want to simplify the age and race labels, since they
@@ -129,19 +127,19 @@ d_cens %>%
     mutate(race = tidy_race(race),
            tidy_age_bins(age))
 #> # A tibble: 414 × 7
-#>    GEOID       NAME                             age   race  value age_f…¹ age_to
-#>    <chr>       <chr>                            <fct> <fct> <dbl>   <dbl>  <dbl>
-#>  1 02180000100 Census Tract 1, Nome Census Are… 10 t… aian    524      10     14
-#>  2 02180000100 Census Tract 1, Nome Census Are… 10 t… asian     1      10     14
-#>  3 02180000100 Census Tract 1, Nome Census Are… 10 t… black     1      10     14
-#>  4 02180000100 Census Tract 1, Nome Census Are… 10 t… hisp      3      10     14
-#>  5 02180000100 Census Tract 1, Nome Census Are… 10 t… nhpi      0      10     14
-#>  6 02180000100 Census Tract 1, Nome Census Are… 10 t… other     0      10     14
-#>  7 02180000100 Census Tract 1, Nome Census Are… 10 t… two      23      10     14
-#>  8 02180000100 Census Tract 1, Nome Census Are… 10 t… white    11      10     14
-#>  9 02180000100 Census Tract 1, Nome Census Are… 10 t… whit…    10      10     14
-#> 10 02180000100 Census Tract 1, Nome Census Are… 15 t… aian    293      15     17
-#> # … with 404 more rows, and abbreviated variable name ¹​age_from
+#>    GEOID       NAME                            age   race  value age_from age_to
+#>    <chr>       <chr>                           <fct> <fct> <dbl>    <dbl>  <dbl>
+#>  1 02180000100 Census Tract 1, Nome Census Ar… 10 t… aian    524       10     14
+#>  2 02180000100 Census Tract 1, Nome Census Ar… 10 t… asian     1       10     14
+#>  3 02180000100 Census Tract 1, Nome Census Ar… 10 t… black     1       10     14
+#>  4 02180000100 Census Tract 1, Nome Census Ar… 10 t… hisp      3       10     14
+#>  5 02180000100 Census Tract 1, Nome Census Ar… 10 t… nhpi      0       10     14
+#>  6 02180000100 Census Tract 1, Nome Census Ar… 10 t… other     0       10     14
+#>  7 02180000100 Census Tract 1, Nome Census Ar… 10 t… two      23       10     14
+#>  8 02180000100 Census Tract 1, Nome Census Ar… 10 t… white    11       10     14
+#>  9 02180000100 Census Tract 1, Nome Census Ar… 10 t… whit…    10       10     14
+#> 10 02180000100 Census Tract 1, Nome Census Ar… 15 t… aian    293       15     17
+#> # ℹ 404 more rows
 ```
 
 Dive into the
