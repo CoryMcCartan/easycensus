@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="index.html">easycensus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,21 +94,19 @@
 <code class="sourceCode R"><span><span class="va">d_cens</span> <span class="op">=</span> <span class="fu"><a href="reference/cens_get.html">cens_get_dec</a></span><span class="op">(</span><span class="st">"P12"</span>, <span class="st">"tract"</span>, state<span class="op">=</span><span class="st">"AK"</span>, county<span class="op">=</span><span class="st">"Nome"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">d_cens</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 960 × 7</span></span>
-<span><span class="co">#&gt;    GEOID       NAME                            varia…¹ value sex   age   race_…²</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;                           &lt;chr&gt;   &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  </span></span>
-<span><span class="co">#&gt;  1 02180000100 Census Tract 1, Nome Census Ar… P012002  3053 male  total total  </span></span>
-<span><span class="co">#&gt;  2 02180000100 Census Tract 1, Nome Census Ar… P012003   359 male  unde… total  </span></span>
-<span><span class="co">#&gt;  3 02180000100 Census Tract 1, Nome Census Ar… P012004   318 male  5 to… total  </span></span>
-<span><span class="co">#&gt;  4 02180000100 Census Tract 1, Nome Census Ar… P012005   294 male  10 t… total  </span></span>
-<span><span class="co">#&gt;  5 02180000100 Census Tract 1, Nome Census Ar… P012006   165 male  15 t… total  </span></span>
-<span><span class="co">#&gt;  6 02180000100 Census Tract 1, Nome Census Ar… P012007   130 male  18 a… total  </span></span>
-<span><span class="co">#&gt;  7 02180000100 Census Tract 1, Nome Census Ar… P012008    53 male  20 y… total  </span></span>
-<span><span class="co">#&gt;  8 02180000100 Census Tract 1, Nome Census Ar… P012009    47 male  21 y… total  </span></span>
-<span><span class="co">#&gt;  9 02180000100 Census Tract 1, Nome Census Ar… P012010   150 male  22 t… total  </span></span>
-<span><span class="co">#&gt; 10 02180000100 Census Tract 1, Nome Census Ar… P012011   204 male  25 t… total  </span></span>
-<span><span class="co">#&gt; # … with 950 more rows, and abbreviated variable names ¹​variable,</span></span>
-<span><span class="co">#&gt; #   ²​race_ethnicity</span></span>
-<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<span><span class="co">#&gt;    GEOID       NAME                    variable value sex   age   race_ethnicity</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;                   &lt;chr&gt;    &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;         </span></span>
+<span><span class="co">#&gt;  1 02180000100 Census Tract 1, Nome C… P012002   3053 male  total total         </span></span>
+<span><span class="co">#&gt;  2 02180000100 Census Tract 1, Nome C… P012003    359 male  unde… total         </span></span>
+<span><span class="co">#&gt;  3 02180000100 Census Tract 1, Nome C… P012004    318 male  5 to… total         </span></span>
+<span><span class="co">#&gt;  4 02180000100 Census Tract 1, Nome C… P012005    294 male  10 t… total         </span></span>
+<span><span class="co">#&gt;  5 02180000100 Census Tract 1, Nome C… P012006    165 male  15 t… total         </span></span>
+<span><span class="co">#&gt;  6 02180000100 Census Tract 1, Nome C… P012007    130 male  18 a… total         </span></span>
+<span><span class="co">#&gt;  7 02180000100 Census Tract 1, Nome C… P012008     53 male  20 y… total         </span></span>
+<span><span class="co">#&gt;  8 02180000100 Census Tract 1, Nome C… P012009     47 male  21 y… total         </span></span>
+<span><span class="co">#&gt;  9 02180000100 Census Tract 1, Nome C… P012010    150 male  22 t… total         </span></span>
+<span><span class="co">#&gt; 10 02180000100 Census Tract 1, Nome C… P012011    204 male  25 t… total         </span></span>
+<span><span class="co">#&gt; # ℹ 950 more rows</span></span></code></pre></div>
 <p>Once you’ve gotten your labeled data, it’s easy to marginalize out the unneeded <code>sex</code> variable. You can either use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code> as usual, or you can use the <code><a href="reference/cens_margin_to.html">cens_margin_to()</a></code> function in <code>easycensus</code>. This has the added advantage of automatically handling margins of error for ACS data.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -131,26 +129,26 @@
 <span><span class="co">#&gt;  8 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… whit…    11</span></span>
 <span><span class="co">#&gt;  9 02180000100 Census Tract 1, Nome Census Area, Alaska 10 to 14 ye… whit…    10</span></span>
 <span><span class="co">#&gt; 10 02180000100 Census Tract 1, Nome Census Area, Alaska 15 to 17 ye… amer…   293</span></span>
-<span><span class="co">#&gt; # … with 404 more rows</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 404 more rows</span></span></code></pre></div>
 <p>Finally, you might want to simplify the age and race labels, since they are kind of verbose. <code>easycensus</code> provides a set of <code>tidy_*()</code> functions to assist with this.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d_cens</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>race <span class="op">=</span> <span class="fu"><a href="reference/tidiers.html">tidy_race</a></span><span class="op">(</span><span class="va">race</span><span class="op">)</span>,</span>
 <span>           <span class="fu"><a href="reference/tidiers.html">tidy_age_bins</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 414 × 7</span></span>
-<span><span class="co">#&gt;    GEOID       NAME                             age   race  value age_f…¹ age_to</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;                            &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 02180000100 Census Tract 1, Nome Census Are… 10 t… aian    524      10     14</span></span>
-<span><span class="co">#&gt;  2 02180000100 Census Tract 1, Nome Census Are… 10 t… asian     1      10     14</span></span>
-<span><span class="co">#&gt;  3 02180000100 Census Tract 1, Nome Census Are… 10 t… black     1      10     14</span></span>
-<span><span class="co">#&gt;  4 02180000100 Census Tract 1, Nome Census Are… 10 t… hisp      3      10     14</span></span>
-<span><span class="co">#&gt;  5 02180000100 Census Tract 1, Nome Census Are… 10 t… nhpi      0      10     14</span></span>
-<span><span class="co">#&gt;  6 02180000100 Census Tract 1, Nome Census Are… 10 t… other     0      10     14</span></span>
-<span><span class="co">#&gt;  7 02180000100 Census Tract 1, Nome Census Are… 10 t… two      23      10     14</span></span>
-<span><span class="co">#&gt;  8 02180000100 Census Tract 1, Nome Census Are… 10 t… white    11      10     14</span></span>
-<span><span class="co">#&gt;  9 02180000100 Census Tract 1, Nome Census Are… 10 t… whit…    10      10     14</span></span>
-<span><span class="co">#&gt; 10 02180000100 Census Tract 1, Nome Census Are… 15 t… aian    293      15     17</span></span>
-<span><span class="co">#&gt; # … with 404 more rows, and abbreviated variable name ¹​age_from</span></span></code></pre></div>
+<span><span class="co">#&gt;    GEOID       NAME                            age   race  value age_from age_to</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;                           &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 02180000100 Census Tract 1, Nome Census Ar… 10 t… aian    524       10     14</span></span>
+<span><span class="co">#&gt;  2 02180000100 Census Tract 1, Nome Census Ar… 10 t… asian     1       10     14</span></span>
+<span><span class="co">#&gt;  3 02180000100 Census Tract 1, Nome Census Ar… 10 t… black     1       10     14</span></span>
+<span><span class="co">#&gt;  4 02180000100 Census Tract 1, Nome Census Ar… 10 t… hisp      3       10     14</span></span>
+<span><span class="co">#&gt;  5 02180000100 Census Tract 1, Nome Census Ar… 10 t… nhpi      0       10     14</span></span>
+<span><span class="co">#&gt;  6 02180000100 Census Tract 1, Nome Census Ar… 10 t… other     0       10     14</span></span>
+<span><span class="co">#&gt;  7 02180000100 Census Tract 1, Nome Census Ar… 10 t… two      23       10     14</span></span>
+<span><span class="co">#&gt;  8 02180000100 Census Tract 1, Nome Census Ar… 10 t… white    11       10     14</span></span>
+<span><span class="co">#&gt;  9 02180000100 Census Tract 1, Nome Census Ar… 10 t… whit…    10       10     14</span></span>
+<span><span class="co">#&gt; 10 02180000100 Census Tract 1, Nome Census Ar… 15 t… aian    293       15     17</span></span>
+<span><span class="co">#&gt; # ℹ 404 more rows</span></span></code></pre></div>
 <p>Dive into the <a href="https://corymccartan.com/easycensus/reference/" class="external-link">reference</a> to learn more!</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -201,7 +199,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://CRAN.R-project.org/package=easycensus" class="external-link"><img src="https://www.r-pkg.org/badges/version/easycensus" alt="CRAN status"></a></li>
-<li><a href="https://opensource.org/license/mit/" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></li>
+<li><a href="https://opensource.org/license/mit" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></li>
 <li><a href="https://github.com/CoryMcCartan/easycensus/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/CoryMcCartan/easycensus/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 </ul>
