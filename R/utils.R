@@ -57,6 +57,7 @@ cens_auth_env = function() {
 cens_margin_to = function(data, ...) {
     dplyr::summarize(
         dplyr::group_by(data, .data$GEOID, .data$NAME, ...),
-        value = sum(.data$value),
-        .groups = "drop")
+        dplyr::across(dplyr::any_of(c("value", "estimate")), sum),
+        .groups = "drop"
+    )
 }
