@@ -1,5 +1,5 @@
 tables_sf1 = cens_parse_tables("dec/sf1", 2010)
-usethis::use_data(tables_sf1, compress="xz", overwrite=TRUE)
+usethis::use_data(tables_sf1, compress = "xz", overwrite = TRUE)
 
 tables_acs1 = cens_parse_tables("acs/acs1", 2019)
 tables_acs5 = cens_parse_tables("acs/acs5", 2019)
@@ -22,4 +22,4 @@ tables_acs = lapply(all_vars, function(nm) {
     out
 })
 names(tables_acs) = all_vars
-usethis::use_data(tables_acs, compress="xz", overwrite=TRUE)
+usethis::use_data(tables_acs, compress = "xz", overwrite = TRUE)

@@ -32,7 +32,7 @@ NULL
 #' estimate(1:4, 0.1) * estimate(1, 0.1)
 #'
 #' @export
-estimate = function(x, se=NULL, moe=NULL, conf=0.9) {
+estimate = function(x, se = NULL, moe = NULL, conf = 0.9) {
     # length-0 case
     if (missing(x) || length(x) == 0) {
         return(new_estimate())
@@ -43,7 +43,7 @@ estimate = function(x, se=NULL, moe=NULL, conf=0.9) {
     }
 
     if (!is.null(moe)) {
-        if (any(moe < 0, na.rm=TRUE)) {
+        if (any(moe < 0, na.rm = TRUE)) {
             cli_abort("{.arg moe} is a margin of error and must be nonnegative.")
         }
         if (conf <= 0 || conf >= 1) {
@@ -57,16 +57,16 @@ estimate = function(x, se=NULL, moe=NULL, conf=0.9) {
         cli_abort("All arguments must be numeric.")
     }
 
-    if (any(se < 0, na.rm=TRUE)) {
+    if (any(se < 0, na.rm = TRUE)) {
         cli_abort("{.arg se} is a standard error and must be nonnegative.")
     }
 
-    do.call(new_estimate, vctrs::vec_recycle_common(est=x, se=se))
+    do.call(new_estimate, vctrs::vec_recycle_common(est = x, se = se))
 }
 
 # internal constructor
-new_estimate = function(est=double(), se=double()) {
-    vctrs::new_rcrd(list(est=est, se=se), class="estimate")
+new_estimate = function(est = double(), se = double()) {
+    vctrs::new_rcrd(list(est = est, se = se), class = "estimate")
 }
 
 #' @export
@@ -92,21 +92,27 @@ is_estimate = function(x) {
 #' @rdname est_extract
 #' @export
 get_est = function(x) {
-    if (!is_estimate(x)) cli_abort("{.arg x} must be an {.cls estimate}")
+    if (!is_estimate(x)) {
+        cli_abort("{.arg x} must be an {.cls estimate}")
+    }
     field(x, "est")
 }
 
 #' @rdname est_extract
 #' @export
 get_se = function(x) {
-    if (!is_estimate(x)) cli_abort("{.arg x} must be an {.cls estimate}")
+    if (!is_estimate(x)) {
+        cli_abort("{.arg x} must be an {.cls estimate}")
+    }
     field(x, "se")
 }
 
 #' @rdname est_extract
 #' @export
 get_moe = function(x, conf = 0.9) {
-    if (!is_estimate(x)) cli_abort("{.arg x} must be an {.cls estimate}")
+    if (!is_estimate(x)) {
+        cli_abort("{.arg x} must be an {.cls estimate}")
+    }
     field(x, "se") * conf_z(conf)
 }
 
@@ -133,10 +139,9 @@ get_moe = function(x, conf = 0.9) {
 #'
 #' @rdname est_extract
 #' @export
-to_rvar = function(x, n=500) {
+to_rvar = function(x, n = 500) {
     rlang::check_installed("posterior")
-    posterior::rvar_rng(rnorm, n=length(x),
-                        mean=field(x, "est"), sd=field(x, "se"))
+    posterior::rvar_rng(rnorm, n = length(x), mean = field(x, "est"), sd = field(x, "se"))
 }
 
 # helper throughout
@@ -165,10 +170,10 @@ vec_cast.estimate.estimate = function(x, to, ...) x
 #' @export
 vec_cast.double.estimate = function(x, to, ...) field(x, "est")
 #' @export
-vec_cast.estimate.double = function(x, to, ...) estimate(x, se=0.0)
+vec_cast.estimate.double = function(x, to, ...) estimate(x, se = 0.0)
 
 #' @export
-vec_cast.estimate.integer = function(x, to, ...) estimate(as.double(x), se=0.0)
+vec_cast.estimate.integer = function(x, to, ...) estimate(as.double(x), se = 0.0)
 
 #' @rdname estimate
 #' @export
@@ -206,14 +211,10 @@ vec_arith.estimate.estimate = function(op, x, y, ...) {
 
     switch(
         op,
-        "+" = new_estimate(est_x + est_y,
-                           sqrt(se_x^2 + se_y^2)),
-        "-" = new_estimate(est_x - est_y,
-                          sqrt(se_x^2 + se_y^2)),
-        "*" = new_estimate(est_x * est_y,
-                          sqrt(est_x^2 * se_x^2 + est_y^2 * se_y^2)),
-        "/" = new_estimate(est_x / est_y,
-                           sqrt(se_x^2 + (est_x / est_y)^2 * se_y^2)),
+        "+" = new_estimate(est_x + est_y, sqrt(se_x^2 + se_y^2)),
+        "-" = new_estimate(est_x - est_y, sqrt(se_x^2 + se_y^2)),
+        "*" = new_estimate(est_x * est_y, sqrt(est_x^2 * se_x^2 + est_y^2 * se_y^2)),
+        "/" = new_estimate(est_x / est_y, sqrt(se_x^2 + (est_x / est_y)^2 * se_y^2)),
         stop_incompatible_op(op, x, y)
     )
 }
@@ -221,7 +222,7 @@ vec_arith.estimate.estimate = function(op, x, y, ...) {
 #' @method vec_arith.estimate numeric
 #' @export
 vec_arith.estimate.numeric = function(op, x, y, ...) {
-    recyc = vec_recycle_common(x=x, y=y)
+    recyc = vec_recycle_common(x = x, y = y)
     est_x = field(recyc$x, "est")
     se_x = field(recyc$x, "se")
     y = recyc$y
@@ -233,11 +234,10 @@ vec_arith.estimate.numeric = function(op, x, y, ...) {
         "-" = new_estimate(est_x - y, se_x),
         "*" = new_estimate(est_x * y, se_x * y),
         "/" = new_estimate(est_x / y, se_x / y),
-        "^" = if_else(y == 0,
-                      new_estimate(rep(1, n), rep(0, n)),
-                      if_else(y == 1, recyc$x,
-                              new_estimate(est_x ^ y, y * est_x^(y-1) * se_x)
-                      )
+        "^" = if_else(
+            y == 0,
+            new_estimate(rep(1, n), rep(0, n)),
+            if_else(y == 1, recyc$x, new_estimate(est_x^y, y * est_x^(y - 1) * se_x))
         ),
         stop_incompatible_op(op, x, y)
     )
@@ -245,7 +245,7 @@ vec_arith.estimate.numeric = function(op, x, y, ...) {
 #' @method vec_arith.numeric estimate
 #' @export
 vec_arith.numeric.estimate = function(op, x, y, ...) {
-    recyc = vec_recycle_common(x=x, y=y)
+    recyc = vec_recycle_common(x = x, y = y)
     est_y = field(recyc$y, "est")
     se_y = field(recyc$y, "se")
     x = recyc$x
@@ -257,9 +257,10 @@ vec_arith.numeric.estimate = function(op, x, y, ...) {
         "-" = new_estimate(est_y - x, se_y),
         "*" = new_estimate(est_y * x, se_y * x),
         "/" = new_estimate(est_y / x, se_y / x),
-        "^" = if_else(x == 0,
-                      new_estimate(rep(0, n), rep(0, n)),
-                      new_estimate(est_y^x, est_y^x * log(x) * se_y)
+        "^" = if_else(
+            x == 0,
+            new_estimate(rep(0, n), rep(0, n)),
+            new_estimate(est_y^x, est_y^x * log(x) * se_y)
         ),
         stop_incompatible_op(op, x, y)
     )
@@ -268,10 +269,11 @@ vec_arith.numeric.estimate = function(op, x, y, ...) {
 #' @method vec_arith.estimate MISSING
 #' @export
 vec_arith.estimate.MISSING <- function(op, x, y, ...) {
-    switch(op,
-           `-` = new_estimate(-field(x, "est"), field(x, "se")),
-           `+` = x,
-           stop_incompatible_op(op, x, y)
+    switch(
+        op,
+        `-` = new_estimate(-field(x, "est"), field(x, "se")),
+        `+` = x,
+        stop_incompatible_op(op, x, y)
     )
 }
 
@@ -281,39 +283,42 @@ vec_math.estimate <- function(.fn, .x, ...) {
     se = field(.x, "se")
     n = length(est)
 
-    switch(.fn,
-           sum = new_estimate(sum(est), sqrt(sum(se^2))),
-           mean = new_estimate(mean(est), sqrt(sum(se^2)) / n),
-           abs = {
-               abs_est = abs(est)
-               if (all(abs_est >= 3*se, na.rm=T)) {
-                   new_estimate(abs_est, se)
-               } else {
-                   cli_warn("Some values too close to zero to calculate absolute value errors.")
-                   abs_est
-               }
-           },
-           sign = {
-               if (all(abs(est) >= 3*se, na.rm=T)) {
-                   new_estimate(sign(est), rep(0, n))
-               } else {
-                   cli_warn("Some values too close to zero to calculate absolute value errors.")
-                   abs_est
-               }
-           },
-           sqrt = new_estimate(sqrt(est), 0.5 * se / sqrt(est)),
-           exp = new_estimate(exp(est), exp(est) * se),
-           expm1 = new_estimate(expm1(est), exp(est) * se),
-           log = new_estimate(log(est), se / est),
-           log1p = new_estimate(log1p(est), se / (1 + est)),
-           cos = new_estimate(cos(est), -sin(est) * se),
-           sin = new_estimate(sin(est), cos(est) * se),
-           tan = new_estimate(cos(est), se / cos(est)^2),
-           {
-               cli_warn(c("Function {.fn {.fn}} not supported.",
-                          ">"="Coerce to numeric to suppress this warning."))
-               vec_math_base(.fn, est)
-           }
+    switch(
+        .fn,
+        sum = new_estimate(sum(est), sqrt(sum(se^2))),
+        mean = new_estimate(mean(est), sqrt(sum(se^2)) / n),
+        abs = {
+            abs_est = abs(est)
+            if (all(abs_est >= 3 * se, na.rm = T)) {
+                new_estimate(abs_est, se)
+            } else {
+                cli_warn("Some values too close to zero to calculate absolute value errors.")
+                abs_est
+            }
+        },
+        sign = {
+            if (all(abs(est) >= 3 * se, na.rm = T)) {
+                new_estimate(sign(est), rep(0, n))
+            } else {
+                cli_warn("Some values too close to zero to calculate absolute value errors.")
+                abs_est
+            }
+        },
+        sqrt = new_estimate(sqrt(est), 0.5 * se / sqrt(est)),
+        exp = new_estimate(exp(est), exp(est) * se),
+        expm1 = new_estimate(expm1(est), exp(est) * se),
+        log = new_estimate(log(est), se / est),
+        log1p = new_estimate(log1p(est), se / (1 + est)),
+        cos = new_estimate(cos(est), -sin(est) * se),
+        sin = new_estimate(sin(est), cos(est) * se),
+        tan = new_estimate(cos(est), se / cos(est)^2),
+        {
+            cli_warn(c(
+                "Function {.fn {.fn}} not supported.",
+                ">" = "Coerce to numeric to suppress this warning."
+            ))
+            vec_math_base(.fn, est)
+        }
     )
 }
 
@@ -343,15 +348,14 @@ est_prop = function(x, y) {
     se_y = field(y, "se")
 
     new_var = se_x^2 - (est_x / est_y)^2 * se_y^2
-    new_var = if_else(new_var >= 0, new_var,
-                      se_x^2 + (est_x / est_y)^2 * se_y^2)
+    new_var = if_else(new_var >= 0, new_var, se_x^2 + (est_x / est_y)^2 * se_y^2)
     new_estimate(est_x / est_y, sqrt(new_var))
 }
 
 #' @rdname est_special
 #' @export
 est_pct_chg = function(x, y) {
-    y/x - 1
+    y / x - 1
 }
 
 
@@ -373,32 +377,30 @@ est_pct_chg = function(x, y) {
 #' @param formatter the formatting function to use internally
 #'
 #' @export
-format.estimate = function(x, conf = 0.9, digits = 2, trim = FALSE, ..., formatter=fmt_plain) {
-    out = formatter(x, conf=conf, digits=digits, trim=trim)
+format.estimate = function(x, conf = 0.9, digits = 2, trim = FALSE, ..., formatter = fmt_plain) {
+    out = formatter(x, conf = conf, digits = digits, trim = trim)
     out[is.na(x)] = NA_character_
     out
 }
 
-fmt_plain = function(x, conf=0.9, digits=2, trim=FALSE) {
-    est = fmt_est(field(x, "est"), digits=digits, trim=trim)
-    moe = fmt_moe(field(x, "se"), conf=conf, digits=digits, trim=trim)
+fmt_plain = function(x, conf = 0.9, digits = 2, trim = FALSE) {
+    est = fmt_est(field(x, "est"), digits = digits, trim = trim)
+    moe = fmt_moe(field(x, "se"), conf = conf, digits = digits, trim = trim)
     str_c(est, " \u00B1 ", moe)
 }
 
-fmt_color = function(x, conf=0.9, digits=2, trim=FALSE) {
-    est = fmt_est(field(x, "est"), digits=digits, trim=trim)
-    moe = fmt_moe(field(x, "se"), conf=conf, digits=digits, trim=trim)
+fmt_color = function(x, conf = 0.9, digits = 2, trim = FALSE) {
+    est = fmt_est(field(x, "est"), digits = digits, trim = trim)
+    moe = fmt_moe(field(x, "se"), conf = conf, digits = digits, trim = trim)
     str_c(est, pillar::style_subtle(str_c(" \u00B1 ", moe)))
 }
 
-fmt_est = function(x, digits=2, trim=FALSE) {
-    format(x, justify="right",
-           digits=digits, scientific=2, trim=trim)
+fmt_est = function(x, digits = 2, trim = FALSE) {
+    format(x, justify = "right", digits = digits, scientific = 2, trim = trim)
 }
 
-fmt_moe = function(x, conf = 0.9, digits=2, trim=FALSE) {
-    format(conf_z(conf) * x,
-           justify="left", digits=digits, scientific=2, trim=trim)
+fmt_moe = function(x, conf = 0.9, digits = 2, trim = FALSE) {
+    format(conf_z(conf) * x, justify = "left", digits = digits, scientific = 2, trim = trim)
 }
 
 
@@ -408,7 +410,6 @@ vec_ptype_abbr.estimate = function(x, ..., prefix_named = FALSE, suffix_shape = 
 #' @importFrom pillar pillar_shaft
 #' @export
 pillar_shaft.estimate <- function(x, ...) {
-    out <- format(x, formatter=fmt_color)
-    pillar::new_pillar_shaft_simple(out, align="right", min_width=9)
+    out <- format(x, formatter = fmt_color)
+    pillar::new_pillar_shaft_simple(out, align = "right", min_width = 9)
 }
-

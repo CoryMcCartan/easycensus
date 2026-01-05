@@ -48,7 +48,7 @@ cens_parse_tables = function(api, year) {
     vars = get_survey_vars(api, year)
 
     dplyr::group_map(vars, parse_table) %>%
-        unlist(recursive=FALSE) %>%
+        unlist(recursive = FALSE) %>%
         lapply(function(x) {
             x$surveys = api
             x
@@ -59,18 +59,22 @@ cens_parse_tables = function(api, year) {
 # Internal functions to parse Census tables with the API ------
 
 get_survey_vars = function(api, year) {
-    raw = censusapi::listCensusMetadata(api, vintage=year, type="variables") %>%
+    raw = censusapi::listCensusMetadata(api, vintage = year, type = "variables") %>%
         as_tibble() %>%
         dplyr::mutate(label = str_trim(.data$label))
     if (str_starts(api, "dec")) {
-        raw = dplyr::filter(raw,
-                            str_starts(.data$label, "(!!)?Total:?!!") |
-                                str_ends(.data$name, "001001"),
-                            !str_detect(.data$label, "!!Not defined"))
+        raw = dplyr::filter(
+            raw,
+            str_starts(.data$label, "(!!)?Total:?!!") |
+                str_ends(.data$name, "001001"),
+            !str_detect(.data$label, "!!Not defined")
+        )
     } else if (str_starts(api, "acs")) {
-        raw = dplyr::filter(raw,
-                            str_starts(.data$label, "Estimate!!"),
-                            !str_detect(.data$label, "!!Not defined")) %>%
+        raw = dplyr::filter(
+            raw,
+            str_starts(.data$label, "Estimate!!"),
+            !str_detect(.data$label, "!!Not defined")
+        ) %>%
             dplyr::mutate(label = str_sub(.data$label, 11))
     }
     raw %>%
@@ -111,14 +115,16 @@ parse_label_group = function(lbl) {
 
 
 parse_table = function(tbl, key) {
-    dim_cats = str_split(tbl$label, "!!", simplify=TRUE)[, drop=FALSE]
+    dim_cats = str_split(tbl$label, "!!", simplify = TRUE)[, drop = FALSE]
     const_cats = apply(dim_cats, 2, dplyr::n_distinct) == 1
-    if (nrow(tbl) > 1 && any(const_cats)) dim_cats = dim_cats[, !const_cats, drop=FALSE]
+    if (nrow(tbl) > 1 && any(const_cats)) {
+        dim_cats = dim_cats[, !const_cats, drop = FALSE]
+    }
     paren_cats = str_extract(tbl$concept, paren_race_re)
     if (any(!is.na(paren_cats))) {
         new_col = dplyr::coalesce(paren_cats, "") %>%
             str_remove_all("[()]")
-        dim_cats = cbind(dim_cats, new_col, deparse.level=0)
+        dim_cats = cbind(dim_cats, new_col, deparse.level = 0)
     }
 
     depth = ncol(dim_cats)
@@ -132,9 +138,9 @@ parse_table = function(tbl, key) {
     short_lbls = str_replace_all(dim_lbls, "_", " ") %>%
         str_remove_all("(or|and|of|the|for|in|,) ") %>%
         str_to_title() %>%
-        abbreviate(5, named=FALSE) %>%
+        abbreviate(5, named = FALSE) %>%
         str_to_lower() %>%
-        paste(collapse="_")
+        paste(collapse = "_")
     if (depth == length(dim_lbls) + 1L) {
         new_dim = paste0(short_lbls, "_sub")
         dim_lbls = c(dim_lbls, new_dim)
@@ -147,14 +153,16 @@ parse_table = function(tbl, key) {
     vars_tbl = dim_cats %>%
         `colnames<-`(dim_lbls) %>%
         as_tibble() %>%
-        dplyr::mutate(variable=tbl$name, .before=1) %>%
+        dplyr::mutate(variable = tbl$name, .before = 1) %>%
         dplyr::mutate(dplyr::across(-.data$variable, function(x) as.factor(parse_label_group(x)))) %>%
         dplyr::arrange(.data$variable)
 
-    out = list(list(concept = tbl$concept[1],
-                    tables = sort(unique(tbl$group)),
-                    dims = dim_lbls,
-                    vars = vars_tbl))
+    out = list(list(
+        concept = tbl$concept[1],
+        tables = sort(unique(tbl$group)),
+        dims = dim_lbls,
+        vars = vars_tbl
+    ))
     names(out) = key[[1]][1]
     out
 }

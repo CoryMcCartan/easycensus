@@ -1,11 +1,14 @@
 test_that("tidiers produce no warnings", {
-  expect_warning({
-      tidy_age(tables_sf1$P12$vars$age)
-      tidy_age_bins(tables_sf1$P12$vars$age)
-      tidy_age_bins(tables_sf1$P12$vars$age, as_factor=TRUE)
-      tidy_race(tables_sf1$P12$vars$race_ethnicity)
-      tidy_race(tables_sf1$P8$vars$race_1)
-  }, regex=NA) # aka expect _no_ warning
+    expect_warning(
+        {
+            tidy_age(tables_sf1$P12$vars$age)
+            tidy_age_bins(tables_sf1$P12$vars$age)
+            tidy_age_bins(tables_sf1$P12$vars$age, as_factor = TRUE)
+            tidy_race(tables_sf1$P12$vars$race_ethnicity)
+            tidy_race(tables_sf1$P8$vars$race_1)
+        },
+        regex = NA
+    ) # aka expect _no_ warning
 })
 
 test_that("generic tidiers work as expected", {

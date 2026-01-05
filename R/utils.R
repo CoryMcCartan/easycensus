@@ -11,18 +11,20 @@ cens_auth = function() {
     } else if (interactive()) {
         cli_alert_info("A Census API key is required to download Census data.")
         url <- "http://api.census.gov/data/key_signup.html"
-        cli_text("Sign up at ", cli::style_hyperlink(text=str_c("<", url, ">"), url=url))
+        cli_text("Sign up at ", cli::style_hyperlink(text = str_c("<", url, ">"), url = url))
         key = readline("Enter your key here: ")
         if (nchar(key) != 40) {
-            cli_abort("A valid Census API key must be provided.", .envir=parent.frame())
+            cli_abort("A valid Census API key must be provided.", .envir = parent.frame())
         } else {
-            cli_inform(c(">"="Use the key automatically in the future by adding
-                         the following line to your {.path .Renviron}:"))
+            cli_inform(c(
+                ">" = "Use the key automatically in the future by adding
+                         the following line to your {.path .Renviron}:"
+            ))
             cli_text("CENSUS_API_KEY=\"{key}\"")
         }
         key
     } else {
-        cli_abort("A valid Census API key must be provided.", .envir=parent.frame())
+        cli_abort("A valid Census API key must be provided.", .envir = parent.frame())
     }
 }
 

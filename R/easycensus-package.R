@@ -15,6 +15,6 @@ NULL
 
 # load table names for autocomplete
 .onLoad <- function(libname, pkgname) {
-    data("tables_sf1", package=pkgname, envir=parent.env(environment()))
-    data("tables_acs", package=pkgname, envir=parent.env(environment()))
+    data("tables_sf1", package = pkgname, envir = parent.env(environment()))
+    data("tables_acs", package = pkgname, envir = parent.env(environment()))
 }

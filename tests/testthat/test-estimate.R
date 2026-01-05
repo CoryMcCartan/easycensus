@@ -5,18 +5,18 @@ test_that("constructor works", {
     expect_s3_class(estimate(), "estimate")
 
     expect_error(estimate(1:3, -2), "nonnegative")
-    expect_error(estimate(1:3, se=1, moe=1.96), "Exactly one")
-    expect_error(estimate(1:3, se=double()), "recycle")
+    expect_error(estimate(1:3, se = 1, moe = 1.96), "Exactly one")
+    expect_error(estimate(1:3, se = double()), "recycle")
 
-    x2 = estimate(1, moe=1, conf=0.95)
-    expect_equal(vctrs::field(x2, "se"), 1/qnorm(0.975))
+    x2 = estimate(1, moe = 1, conf = 0.95)
+    expect_equal(vctrs::field(x2, "se"), 1 / qnorm(0.975))
 })
 
 test_that("printing works", {
     x1 = estimate(pi, exp(-1))
     expect_equal(format(x1), "3.1 ± 0.61")
-    expect_equal(format(x1, digits=6), "3.14159 ± 0.605108")
-    expect_equal(format(x1, conf=0.5), "3.1 ± 0.25")
+    expect_equal(format(x1, digits = 6), "3.14159 ± 0.605108")
+    expect_equal(format(x1, conf = 0.5), "3.1 ± 0.25")
 })
 
 test_that("coercion and comparison work", {
@@ -36,8 +36,8 @@ test_that("math works", {
     x1 = estimate(1, 0.2)
     x2 = estimate(1.5, 0.1)
 
-    expect_equal(x1+x2, estimate(2.5, sqrt(0.05)))
-    expect_equal(x1-x2, estimate(-0.5, sqrt(0.05)))
+    expect_equal(x1 + x2, estimate(2.5, sqrt(0.05)))
+    expect_equal(x1 - x2, estimate(-0.5, sqrt(0.05)))
 
     r1 = x1 / x2
     r2 = est_prop(x1, x2)
