@@ -1,0 +1,50 @@
+# Changelog
+
+## easycensus 1.1.2
+
+- Update documentation per CRAN NOTEs
+- Update maintainer information
+
+## easycensus 1.1.1
+
+CRAN release: 2023-03-20
+
+- New
+  [`cens_get_raw()`](http://corymccartan.com/easycensus/reference/cens_get.md)
+  allows users to try to download from non-ACS and non-2010-decennial
+  APIs. Goes hand-in-hand with
+  [`cens_parse_tables()`](http://corymccartan.com/easycensus/reference/cens_parse_tables.md).
+- Fixes CRAN issues and other bugs
+- Improves consistency of
+  [`cens_get_acs()`](http://corymccartan.com/easycensus/reference/cens_get.md)
+
+## easycensus 1.0.0
+
+CRAN release: 2022-08-25
+
+- Core functions renamed for a consistent `cens_` prefix
+- Use `censusapi` instead of `tidycensus` for fewer dependencies
+- New `estimate` vector type that tracks uncertainty through
+  mathematical operations
+- Expose parsed tables to users with a new `cens_table` type
+- More flexible geography options when downloading data. See
+  [`cens_geo()`](http://corymccartan.com/easycensus/reference/cens_geo.md)
+  for details.
+- Improved tidiers, including new income bin and detailed race tidiers
+
+## easycensus 0.2.0
+
+- CRAN resubmission
+
+## easycensus 0.2.0
+
+- Availability information for 1-year and 5-year ACS
+- Improve documentation and parameter organization
+- New tests
+
+## easycensus 0.1.0
+
+- Initial release
+- Functionality to search and download ACS and 2010 Census tables
+- Helper functions for recoding common variables and for marginalizing
+  out nuisance variables
