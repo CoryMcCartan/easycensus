@@ -41,7 +41,7 @@
 #' @returns A list with two elements, `region` and `regionin`, which together
 #'   specify a valid Census API geography argument.
 #'
-#' @examples
+#' @examples \dontrun{
 #' cens_geo(state="WA")
 #' cens_geo("county", state="WA") # equivalent to `cens_geo(county="all", state="WA")`
 #' cens_geo(county="King", state="Wash")
@@ -50,6 +50,7 @@
 #' cens_geo("zcta", state="WA", check=FALSE)
 #' cens_geo(cd="09", state="WA", check=FALSE)
 #' cens_geo("county_part", state="WA", cd="09", check=FALSE)
+#' }
 #'
 #' @export
 cens_geo <- function(geo = NULL, ..., check = TRUE, api = "acs/acs5", year = 2019) {
