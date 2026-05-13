@@ -119,6 +119,7 @@ Supported geography arguments:
 }
 }
 \examples{
+\dontrun{
 cens_geo(state="WA")
 cens_geo("county", state="WA") # equivalent to `cens_geo(county="all", state="WA")`
 cens_geo(county="King", state="Wash")
@@ -127,5 +128,6 @@ cens_geo(zcta=NA, state="WA", check=FALSE)
 cens_geo("zcta", state="WA", check=FALSE)
 cens_geo(cd="09", state="WA", check=FALSE)
 cens_geo("county_part", state="WA", cd="09", check=FALSE)
+}
 
 }

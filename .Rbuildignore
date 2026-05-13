@@ -5,6 +5,7 @@
 ^README\.Rmd$
 ^README_cache$
 ^_pkgdown\.yml$
+^air\.toml$
 ^docs$
 ^pkgdown$
 ^data-raw$
