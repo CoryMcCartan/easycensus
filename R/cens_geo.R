@@ -89,7 +89,7 @@ cens_geo <- function(geo = NULL, ..., check = TRUE, api = "acs/acs5", year = 201
 
     if (isTRUE(check)) {
         # match geographies to available
-        d_geo = as_tibble(censusapi::listCensusMetadata(name = api, vintage = year, type = "geographies"))
+        d_geo = as_tibble(censusapi::listCensusMetadata(name = api, vintage = year, type = "geographies", key = cens_auth()))
         idx_for = which(geo_for == d_geo$name)
         if (length(idx_for) == 0) {
             cli_abort("Geography level {.val {geo_for}} not found.")
