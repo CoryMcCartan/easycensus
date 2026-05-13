@@ -20,6 +20,7 @@ function to help you locate exactly which decennial census table to use
 to get the data you want.
 
 ``` r
+
 library(easycensus)
 
 cens_find_dec(age, race)
@@ -58,6 +59,7 @@ you need to do to get your data is to call
 [`cens_get_dec()`](http://corymccartan.com/easycensus/reference/cens_get.md).
 
 ``` r
+
 d_cens = cens_get_dec("P12", "tract", state="AK", county="Nome")
 print(d_cens)
 #> # A tibble: 960 × 7
@@ -86,6 +88,7 @@ function in `easycensus`. This has the added advantage of automatically
 handling margins of error for ACS data.
 
 ``` r
+
 library(dplyr)
 
 d_cens = d_cens %>%
@@ -114,6 +117,7 @@ are kind of verbose. `easycensus` provides a set of `tidy_*()` functions
 to assist with this.
 
 ``` r
+
 d_cens %>%
     mutate(race = tidy_race(race),
            tidy_age_bins(age))
@@ -143,6 +147,7 @@ You can install the released version of easycensus from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
+
 install.packages("easycensus")
 ```
 
@@ -150,6 +155,7 @@ Or install the development version from [GitHub](https://github.com/)
 with:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("CoryMcCartan/easycensus")
 ```

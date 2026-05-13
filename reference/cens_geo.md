@@ -217,60 +217,14 @@ Supported geography arguments:
 ## Examples
 
 ``` r
+if (FALSE) { # \dontrun{
 cens_geo(state="WA")
-#> $region
-#> [1] "state:53"
-#> 
-#> $regionin
-#> NULL
-#> 
 cens_geo("county", state="WA") # equivalent to `cens_geo(county="all", state="WA")`
-#> $region
-#> [1] "county:*"
-#> 
-#> $regionin
-#> [1] "state:53"
-#> 
 cens_geo(county="King", state="Wash")
-#> $region
-#> [1] "county:033"
-#> 
-#> $regionin
-#> [1] "state:53"
-#> 
 cens_geo(zcta="02138", check=FALSE)
-#> $region
-#> [1] "zip code tabulation area:02138"
-#> 
-#> $regionin
-#> NULL
-#> 
 cens_geo(zcta=NA, state="WA", check=FALSE)
-#> $region
-#> [1] "zip code tabulation area:*"
-#> 
-#> $regionin
-#> [1] "state:53"
-#> 
 cens_geo("zcta", state="WA", check=FALSE)
-#> $region
-#> [1] "zip code tabulation area:*"
-#> 
-#> $regionin
-#> [1] "state:53"
-#> 
 cens_geo(cd="09", state="WA", check=FALSE)
-#> $region
-#> [1] "congressional district:09"
-#> 
-#> $regionin
-#> [1] "state:53"
-#> 
 cens_geo("county_part", state="WA", cd="09", check=FALSE)
-#> $region
-#> [1] "county (or part):*"
-#> 
-#> $regionin
-#> [1] "state:53+congressional district:09"
-#> 
+} # }
 ```

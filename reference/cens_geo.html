@@ -23,7 +23,7 @@ which geographic specifiers may be provided in combination with others.'><meta p
 
     <a class="navbar-brand me-2" href="../index.html">easycensus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -181,62 +181,16 @@ specify a valid Census API geography argument.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cens_geo</span><span class="op">(</span>state<span class="op">=</span><span class="st">"WA"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "state:53"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $regionin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="fu">cens_geo</span><span class="op">(</span>state<span class="op">=</span><span class="st">"WA"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">cens_geo</span><span class="op">(</span><span class="st">"county"</span>, state<span class="op">=</span><span class="st">"WA"</span><span class="op">)</span> <span class="co"># equivalent to `cens_geo(county="all", state="WA")`</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "county:*"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $regionin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "state:53"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">cens_geo</span><span class="op">(</span>county<span class="op">=</span><span class="st">"King"</span>, state<span class="op">=</span><span class="st">"Wash"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "county:033"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $regionin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "state:53"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">cens_geo</span><span class="op">(</span>zcta<span class="op">=</span><span class="st">"02138"</span>, check<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "zip code tabulation area:02138"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $regionin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">cens_geo</span><span class="op">(</span>zcta<span class="op">=</span><span class="cn">NA</span>, state<span class="op">=</span><span class="st">"WA"</span>, check<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "zip code tabulation area:*"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $regionin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "state:53"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">cens_geo</span><span class="op">(</span><span class="st">"zcta"</span>, state<span class="op">=</span><span class="st">"WA"</span>, check<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "zip code tabulation area:*"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $regionin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "state:53"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">cens_geo</span><span class="op">(</span>cd<span class="op">=</span><span class="st">"09"</span>, state<span class="op">=</span><span class="st">"WA"</span>, check<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "congressional district:09"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $regionin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "state:53"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">cens_geo</span><span class="op">(</span><span class="st">"county_part"</span>, state<span class="op">=</span><span class="st">"WA"</span>, cd<span class="op">=</span><span class="st">"09"</span>, check<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "county (or part):*"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $regionin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "state:53+congressional district:09"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
